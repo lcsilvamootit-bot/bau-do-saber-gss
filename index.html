@@ -1480,8 +1480,12 @@
       <div id="mw" style="display:none;flex-direction:column;flex-grow:1;overflow-y:auto">
         <div class="chat-header">
           <div class="share-container">
-            <button class="btn bo" onclick="toggleShareMenu(event)">
-              <i data-lucide="share-2" size="14"></i> Compartilhar
+            <button class="btn bo" onclick="toggleShareMenu(event)" style="gap:8px">
+              <i data-lucide="share-2" size="14"></i>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="color:#25D366">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.706 1.438h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg> Compartilhar
             </button>
             <div class="share-menu" id="shareMenu">
               <button class="share-item" onclick="shareTo('whatsapp')">
@@ -1693,11 +1697,11 @@
      */
     var FLOWS = {
       pricing: [
-        { t: 'Agente ERP: lendo invent&aacute;rio de 143 breaks Copa (Fases G + Oitavas)...', s: 'ERP Invent&aacute;rio' },
-        { t: 'Agente Ibope: carregando proje&ccedil;&atilde;o de audi&ecirc;ncia por jogo e hor&aacute;rio...', s: 'Ibope/Kantar' },
-        { t: 'Agente CENP: verificando CPM praticado vs. benchmarks de mercado (Fev/2026)...', s: 'CENP' },
-        { t: 'Agente Comercial (IM): cruzando demanda setorial de Alimentos &amp; Bebidas...', s: 'IM Interno' },
-        { t: 'Agente S&iacute;ntese: calculando gap de receita e recomenda&ccedil;&otilde;es de reprecifica&ccedil;&atilde;o...', s: 'Modelo GSS' }
+        { t: 'Agente ERP Invent&aacute;rio: segmentando 143 breaks por fase e rating projetado...', s: 'ERP Invent.' },
+        { t: 'Agente ERP Talentos: consultando disponibilidade de elenco liderado por Falcão Bueno...', s: 'ERP Talentos' },
+        { t: 'Agente Web: mapeando repercuss&atilde;o externa e confirma&ccedil;&otilde;es na imprensa...', s: 'Google News / Web' },
+        { t: 'Agente CENP: cruzando CPM praticado vs. benchmark por n&iacute;vel de audi&ecirc;ncia...', s: 'CENP / Ibope' },
+        { t: 'Agente S&iacute;ntese: consolidando oportunidade de R$ 68M e an&aacute;lise de mercado...', s: 'Modelo GSS' }
       ],
       cenografia: [
         { t: 'Agente ERP Compras: lendo pedidos de insumos das 3 produ&ccedil;&otilde;es Q2...', s: 'ERP Compras' },
@@ -1765,11 +1769,11 @@
     function pcrd(b) {
       var el = document.createElement('div'); el.className = 'ec';
       el.innerHTML = `<div class="ech"><h3><i data-lucide="trending-up" size="15"></i>Parecer &mdash; Invent&aacute;rio Copa 2026</h3><span class="badge bred">A&ccedil;&atilde;o Urgente</span></div><div class="ecb">
-<p class="bt2"><strong>Diagn&oacute;stico:</strong> O invent&aacute;rio de 143 breaks <span class="src-pill internal">ERP Invent.</span> est&aacute; precificado pela tabela Jan/2026. O CENP <span class="src-pill external">CENP</span> indica que o CPM m&eacute;dio para breaks esportivos cresceu <strong>22%</strong> desde a homologa&ccedil;&atilde;o. Proje&ccedil;&atilde;o Ibope <span class="src-pill external">Ibope</span> indica audi&ecirc;ncia m&eacute;dia de 38 pts nos jogos do Brasil em grupos.</p>
+<p class="bt2"><strong>Diagn&oacute;stico:</strong> Oportunidade captur&aacute;vel de <strong>R$ 68M</strong> via revis&atilde;o de tabela em 143 breaks <span class="src-pill internal">ERP Invent.</span>. A audi&ecirc;ncia projetada de 38 pts <span class="src-pill external">Ibope</span> &eacute; potencializada pelo elenco liderado por <strong>Falcão Bueno</strong>, garantindo reten&ccedil;&atilde;o premium.</p>
 <div class="kg">
-<div class="kb"><div class="kl">Invent&aacute;rio Dispon&iacute;vel</div><div class="kv b">143</div><div class="ks">Breaks Copa Grupos + Oitavas</div></div>
-<div class="kb"><div class="kl">Receita Atual (Tabela Base)</div><div class="kv y">R$ 310M</div><div class="ks">CPM sem revis&atilde;o</div></div>
 <div class="kb"><div class="kl">Receita Potencial</div><div class="kv g">R$ 378M</div><div class="ks">&#8593; +R$ 68M captur&aacute;vel</div></div>
+<div class="kb"><div class="kl">Engajamento Talentos</div><div class="kv b">3.2x</div><div class="ks">vs. m&eacute;dia do mercado</div></div>
+<div class="kb"><div class="kl">Invent&aacute;rio Ocupado</div><div class="kv y">82%</div><div class="ks">Pr&eacute;-venda iniciada</div></div>
 </div>
 <div class="sdv">Recomenda&ccedil;&atilde;o</div>
 <p class="bt2">&#10003; <strong>Revisar CPM Premium</strong> (Breaks 1 e 2, &gt;35 pts) com acr&eacute;scimo de 18&ndash;22% sobre tabela base <span class="src-pill external">CENP Benchmark</span>.<br>&#10003; <strong>Pacote Copa + Digital:</strong> TV Aberta + pr&eacute;-roll +SBT com desconto de 10% &mdash; aumenta ocupa&ccedil;&atilde;o e ROI.<br>&#10003; <strong>Prioridade setorial:</strong> Alimentos &amp; Bebidas t&ecirc;m maior prop&ecirc;nso hist&oacute;rico a pagar premium <span class="src-pill internal">IM Comercial</span>.</p>
@@ -2128,11 +2132,7 @@
       mbd.parentElement.dataset.sourceBtnId = btn.id;
 
       /* ---- Mini-flow de aprofundamento ---- */
-      var miniSteps = [
-        { t: 'Agente ERP: segmentando 143 breaks por fase e rating projetado...', s: 'ERP Inventário' },
-        { t: 'Agente CENP: cruzando CPM praticado vs. benchmark por nível de audiência...', s: 'CENP / Ibope' },
-        { t: 'Agente Comercial: identificando propensidade de fechamento por setor...', s: 'IM Comercial' }
-      ];
+      var miniSteps = FLOWS.pricing;
       var sd = document.createElement('div'); sd.className = 'detail-mini-steps'; mbd.appendChild(sd);
       for (var s of miniSteps) {
         var el = document.createElement('div'); el.className = 'stp';
@@ -2181,10 +2181,46 @@
         + '<div class="phase-table">' + phaseHtml + '</div>'
         + '</div>'
         + '<div class="phase-section">'
-        + '<div class="phase-section-title">&#127959; Propensidade por Setor</div>'
-        + sectorHtml
+        + '<div class="phase-section-title">&#11088; Estrat&eacute;gia de Talentos e Web Insight</div>'
+        + '<div style="background:#F0F4FF; border:1px solid #C7D2F5; border-radius:10px; padding:14px; margin-bottom:12px">'
+        + '<div style="display:flex; align-items:flex-start; gap:12px">'
+        + '<div style="width:40px; height:40px; background:var(--pu); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:18px; flex-shrink:0;">&#127897;</div>'
+        + '<div>'
+        + '<div style="font-size:13px; font-weight:700; color:var(--bl)">Elenco SBT + N Sports (Simulcast)</div>'
+        + '<div style="font-size:11px; color:var(--t2); margin-top:2px">'
+        + '<strong>Narradores:</strong> Galvão Bueno (Brasil/Abertura/Final), Tiago Leifert (22 jogos).<br>'
+        + '<strong>Comentaristas:</strong> Alexandre Pato, Mauro Beting, Nadine Basttos.<br>'
+        + '<strong>Reportagem:</strong> Mauro Naves, André Hernan, João Venturi.'
         + '</div>'
-        + '<div class="detail-risk-note" style="margin-top:10px">&#9888; <strong>Janela comercial crítica:</strong> negociações devem ser fechadas at&eacute; 15/05/2026 para garantir tabela de CPM revisado na Fase de Grupos. Setores com propensidade &gt;75% devem ser abordados esta semana.'
+        + '</div>'
+        + '</div>'
+        + '<div style="margin-top:12px; font-size:11px; color:var(--t1); background:#fff; padding:10px; border-radius:6px; border:1px solid var(--bd)">'
+        + '<strong>Atra&ccedil;&atilde;o:</strong> Galvão FC (Vampeta, Beting) + Cobertura Família SBT.'
+        + '</div>'
+        + '</div>'
+        + '<div class="phase-section-title">&#128200; An&aacute;lise de Sentimento (Mercado Publicit&aacute;rio)</div>'
+        + '<div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">'
+        + '<div style="background:#E8F5E9; border:1px solid #C8E6C9; padding:12px; border-radius:8px;">'
+        + '<div style="font-size:10px; font-weight:800; color:#2E7D32; text-transform:uppercase; margin-bottom:6px">&#43; Pontos de Atracao</div>'
+        + '<ul style="margin:0; padding-left:14px; font-size:10.5px; color:#1B5E20; line-height:1.4">'
+        + '<li>Nostalgia e Confiança (Galvão)</li>'
+        + '<li>Mix Galvão (Tradicional) + Leifert (Moderno)</li>'
+        + '<li>Time GSS de bastidores (Hernan/Naves)</li>'
+        + '<li>Identidade Família (DNA SBT)</li>'
+        + '</ul>'
+        + '</div>'
+        + '<div style="background:#FFEBEE; border:1px solid #FFCDD2; padding:12px; border-radius:8px;">'
+        + '<div style="font-size:10px; font-weight:800; color:#C62828; text-transform:uppercase; margin-bottom:6px">&#45; Riscos de Fuga</div>'
+        + '<ul style="margin:0; padding-left:14px; font-size:10.5px; color:#B71C1C; line-height:1.4">'
+        + '<li>Falta de Exclusividade (Globo)</li>'
+        + '<li>Peso Digital da CazéTV (YouTube)</li>'
+        + '<li>Polarização de Estilo do Galvão</li>'
+        + '<li>Risco de tom excessivo de entretenimento</li>'
+        + '</ul>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        + '<div class="detail-risk-note" style="margin-top:10px">&#9888; <strong>Janela comercial cr&iacute;tica:</strong> Negocia&ccedil;&otilde;es devem ser fechadas at&eacute; 15/05/2026. O simulcast com N Sports amplia cobertura, mas requer refor&ccedil;o no ROI vs. oferta digital da CazéTV.'
         + '</div></div></div>';
       mbd.appendChild(box);
       lucide.createIcons();
