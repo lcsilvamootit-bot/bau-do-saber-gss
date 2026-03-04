@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ba&uacute; do Saber</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bl: #002855;
+      --ye: #F2A900;
+      --gr: #008751;
+      --rd: #D32F2F;
+      --pu: #5B5FC7;
+      --bd: #ECECEC;
+      --hv: #F0F0F0;
+      --t1: #0D0D0D;
+      --t2: #5E5E5E
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: #fff;
+      color: var(--t1);
+      overflow: hidden
+    }
+
+    .sb {
+      width: 260px;
+      background: #F9F9F9;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--bd);
+      transition: width .3s;
+      flex-shrink: 0
+    }
+
+    .sb.off {
+      width: 0;
+      border: none
+    }
+
+    .sbi {
+      width: 260px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      transition: opacity .2s, transform .3s
+    }
+
+    .sb.off .sbi {
+      opacity: 0;
+      transform: translateX(-20px);
+      pointer-events: none
+    }
+
+    .sh {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      margin-bottom: 16px
+    }
+
+    .sl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--bl)
+    }
+
+    .sm {
+      flex-grow: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .mt {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t2);
+      padding: 14px 12px 4px;
+      text-transform: uppercase;
+      letter-spacing: .5px
+    }
+
+    .mi {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12.5px;
+      transition: background .15s
+    }
+
+    .mi:hover {
+      background: var(--hv)
+    }
+
+    .mi.on {
+      background: var(--hv);
+      font-weight: 700
+    }
+
+    .mi i,
+    .mi svg {
+      color: var(--t2);
+      flex-shrink: 0
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .dr {
+      background: var(--rd)
+    }
+
+    .dy {
+      background: var(--ye)
+    }
+
+    .dg {
+      background: var(--gr)
+    }
+
+    .sf {
+      margin-top: auto;
+      border-top: 1px solid var(--bd);
+      padding: 12px
+    }
+
+    .pi {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500
+    }
+
+    .pi:hover {
+      background: var(--hv)
+    }
+
+    .pa {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bl);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0
+    }
+
+    .ib {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--t2);
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .15s
+    }
+
+    .ib:hover {
+      background: var(--hv);
+      color: var(--t1)
+    }
+
+    .ma {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden
+    }
+
+    .tb {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--bd);
+      flex-shrink: 0
+    }
+
+    .tl {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .tt {
+      font-size: 14px;
+      font-weight: 700
+    }
+
+    .ts {
+      font-size: 12px;
+      color: var(--t2)
+    }
+
+    .tbtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid var(--bd);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--t1);
+      text-decoration: none;
+      transition: all .2s
+    }
+
+    .tbtn:hover {
+      background: var(--hv)
+    }
+
+    .tbtn i,
+    .tbtn svg {
+      color: var(--pu)
+    }
+
+    .ca {
+      flex-grow: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column
+    }
+
+    .em {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center
+    }
+
+    .ml {
+      width: 110px;
+      height: 110px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 24px rgba(0, 40, 85, .18);
+      border: 2px solid var(--bd);
+      overflow: hidden
+    }
+
+    .ml img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain
+    }
+
+    .em h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--bl)
+    }
+
+    .em p {
+      font-size: 14px;
+      color: var(--t2);
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 36px
+    }
+
+    .cg {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 720px;
+      width: 100%
+    }
+
+    .sc {
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: left;
+      cursor: pointer;
+      transition: all .2s;
+      background: #fff
+    }
+
+    .sc:hover {
+      background: var(--hv);
+      border-color: #C0C0C0;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(0, 0, 0, .08)
+    }
+
+    .sl2 {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--bl);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 6px
+    }
+
+    .st {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 7px
+    }
+
+    .sm2 {
+      font-size: 12px;
+      color: var(--t2)
+    }
+
+    .src-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      background: #E3F0FF;
+      color: var(--bl);
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-top: 6px
+    }
+
+    .mwrap {
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px
+    }
+
+    .mu {
+      align-self: flex-end;
+      background: var(--bl);
+      color: #fff;
+      padding: 11px 18px;
+      border-radius: 18px 18px 4px 18px;
+      max-width: 70%;
+      font-size: 14px;
+      line-height: 1.5
+    }
+
+    .mai {
+      align-self: flex-start;
+      width: 100%
+    }
+
+    .ah {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px
+    }
+
+    .av {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1.5px solid var(--bd);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden
+    }
+
+    .av img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain
+    }
+
+    .an {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--bl)
+    }
+
+    .stps {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px
+    }
+
+    .stp {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--t2);
+      padding: 5px 0;
+      line-height: 1.4
+    }
+
+    .stp.dn {
+      color: var(--gr)
+    }
+
+    .si {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      margin-top: 1px
+    }
+
+    .si.ok {
+      background: var(--gr);
+      color: #fff
+    }
+
+    .si.sp {
+      border: 2px solid var(--ye);
+      border-top-color: transparent;
+      animation: sp .8s linear infinite
+    }
+
+    @keyframes sp {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .src-row {
+      font-size: 10.5px;
+      color: var(--pu);
+      font-weight: 600;
+      margin-left: 2px
+    }
+
+    .ec {
+      border: 1px solid var(--bd);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .06)
+    }
+
+    .ech {
+      background: var(--bl);
+      color: #fff;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .ech h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .ecb {
+      padding: 20px;
+      background: #fff
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .bred {
+      background: #FFEBEE;
+      color: var(--rd)
+    }
+
+    .bgrn {
+      background: #E8F5E9;
+      color: var(--gr)
+    }
+
+    .bylw {
+      background: #FFF8E1;
+      color: #7A5C00
+    }
+
+    .kg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0
+    }
+
+    .kb {
+      background: #F8F9FA;
+      border: 1px solid var(--bd);
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center
+    }
+
+    .kl {
+      font-size: 10.5px;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      font-weight: 700;
+      margin-bottom: 5px
+    }
+
+    .kv {
+      font-size: 22px;
+      font-weight: 800
+    }
+
+    .kv.g {
+      color: var(--gr)
+    }
+
+    .kv.r {
+      color: var(--rd)
+    }
+
+    .kv.b {
+      color: var(--bl)
+    }
+
+    .kv.y {
+      color: #7A5C00
+    }
+
+    .ks {
+      font-size: 10.5px;
+      color: var(--t2);
+      margin-top: 3px
+    }
+
+    .sdv {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border-top: 1px solid var(--bd);
+      padding-top: 14px;
+      margin: 16px 0 10px
+    }
+
+    .bt2 {
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: #2C2C2C
+    }
+
+    .src-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      background: #E3F0FF;
+      color: var(--bl);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 700;
+      margin: 0 3px
+    }
+
+    .acts {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all .2s
+    }
+
+    .bp {
+      background: var(--bl);
+      color: #fff
+    }
+
+    .bp:hover {
+      background: #001a3d;
+      box-shadow: 0 4px 12px rgba(0, 40, 85, .3)
+    }
+
+    .bpu {
+      background: var(--pu);
+      color: #fff
+    }
+
+    .bpu:hover {
+      background: #4a4fad
+    }
+
+    .bo {
+      background: #fff;
+      color: var(--t1);
+      border: 1px solid var(--bd)
+    }
+
+    .bo:hover {
+      background: var(--hv)
+    }
+
+    .tm-steps {
+      margin-top: 16px;
+      border: 1px solid #C7D2F5;
+      border-radius: 12px;
+      padding: 16px;
+      background: #F0F4FF
+    }
+
+    .tm-hd {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--pu);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .mc {
+      border-radius: 12px;
+      margin-top: 16px;
+      overflow: hidden;
+      border: 1px solid #C7D2F5
+    }
+
+    .mc-hd {
+      background: var(--pu);
+      color: #fff;
+      padding: 14px 18px
+    }
+
+    .mc-hd h4 {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 3px
+    }
+
+    .mc-sub {
+      font-size: 12px;
+      opacity: .85
+    }
+
+    .mc-bd {
+      padding: 18px;
+      background: #fff
+    }
+
+    .mc-meta {
+      font-size: 12.5px;
+      color: var(--t2);
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap
+    }
+
+    .mc-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600
+    }
+
+    .ptcs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px
+    }
+
+    .ptc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+      min-width: 60px;
+      max-width: 70px
+    }
+
+    .ptc-av {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff
+    }
+
+    .ptc-nm {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--t1);
+      line-height: 1.2
+    }
+
+    .ptc-rg {
+      font-size: 9px;
+      color: var(--t2);
+      line-height: 1.2
+    }
+
+    .ag-box {
+      background: #F0F4FF;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+      color: #333;
+      border-left: 3px solid var(--pu);
+      margin-bottom: 14px
+    }
+
+    .ag-box strong {
+      color: var(--pu)
+    }
+
+    .sim-c {
+      background: #fff;
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 14px
+    }
+
+    .sim-c h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--bl);
+      margin-bottom: 12px
+    }
+
+    .sr {
+      background: #F8F9FA;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center
+    }
+
+    .sl3 {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-weight: 700;
+      color: var(--t2);
+      margin-bottom: 4px
+    }
+
+    .sv {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gr)
+    }
+
+    .db {
+      margin: 10px 0
+    }
+
+    .dl {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-bottom: 5px
+    }
+
+    .dt {
+      height: 10px;
+      background: var(--bd);
+      border-radius: 5px;
+      overflow: hidden
+    }
+
+    .df {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1.2s ease
+    }
+
+    .fb {
+      background: var(--bl)
+    }
+
+    .fy {
+      background: var(--ye)
+    }
+
+    .fg {
+      background: var(--gr)
+    }
+
+    .ia {
+      padding: 14px 20px 18px;
+      border-top: 1px solid var(--bd);
+      flex-shrink: 0;
+      max-width: 820px;
+      width: 100%;
+      margin: 0 auto
+    }
+
+    .cb {
+      background: #F4F4F4;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      transition: all .2s
+    }
+
+    .cb:focus-within {
+      background: #fff;
+      border-color: #D1D1D1;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .08)
+    }
+
+    .ci {
+      flex-grow: 1;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      padding: 0 12px;
+      outline: none;
+      color: var(--t1)
+    }
+
+    .ci::placeholder {
+      color: #9E9E9E
+    }
+
+    .se {
+      background: var(--bl);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      transition: all .2s;
+      flex-shrink: 0
+    }
+
+    .se:hover {
+      background: #001a3d;
+      transform: scale(1.05)
+    }
+
+    .hn {
+      text-align: center;
+      font-size: 11px;
+      color: #9E9E9E;
+      margin-top: 8px
+    }
+
+    /* =================== DETALHAR — breakdown granular Copa =================== */
+    .detail-area {
+      margin-top: 16px
+    }
+
+    .detail-mini-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 14px
+    }
+
+    .phase-section {
+      margin-bottom: 18px
+    }
+
+    .phase-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 10px
+    }
+
+    .phase-table {
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .phase-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #F8F9FA;
+      border: 1px solid var(--bd);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 12.5px
+    }
+
+    .phase-name {
+      flex: 1;
+      font-weight: 700;
+      color: var(--t1)
+    }
+
+    .phase-breaks {
+      width: 48px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--t2)
+    }
+
+    .phase-cpm-old {
+      width: 68px;
+      text-align: right;
+      color: var(--t2);
+      text-decoration: line-through;
+      font-size: 11.5px
+    }
+
+    .phase-cpm-new {
+      width: 68px;
+      text-align: right;
+      font-weight: 700;
+      color: var(--gr)
+    }
+
+    .phase-delta {
+      width: 48px;
+      text-align: right;
+      font-weight: 700;
+      color: var(--gr);
+      font-size: 12px
+    }
+
+    .risk-chip {
+      display: inline-flex;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700
+    }
+
+    .risk-chip.alto {
+      background: #FFEBEE;
+      color: var(--rd)
+    }
+
+    .risk-chip.medio {
+      background: #FFF8E1;
+      color: #7A5C00
+    }
+
+    .risk-chip.baixo {
+      background: #E8F5E9;
+      color: var(--gr)
+    }
+
+    .sector-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 12.5px
+    }
+
+    .sector-name {
+      width: 160px;
+      font-weight: 600
+    }
+
+    .sector-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--bd);
+      border-radius: 4px;
+      overflow: hidden
+    }
+
+    .sector-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--bl);
+      transition: width 1s ease
+    }
+
+    .sector-cpm {
+      width: 64px;
+      text-align: right;
+      font-weight: 700;
+      color: var(--bl);
+      font-size: 12px
+    }
+
+    .detail-risk-note {
+      background: #FFF8E1;
+      border-left: 3px solid var(--ye);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #5C4500;
+      margin-top: 14px
+    }
+
+    /* =================== MICROFONE — input de áudio =================== */
+    .mic-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--t2);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      flex-shrink: 0
+    }
+
+    .mic-btn:hover {
+      background: var(--hv);
+      color: var(--bl)
+    }
+
+    .mic-btn.recording {
+      color: var(--rd);
+      animation: mic-pulse .8s ease-in-out infinite
+    }
+
+    .mic-timer {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--rd);
+      min-width: 30px;
+      text-align: center;
+      display: none
+    }
+
+    .mic-timer.active {
+      display: block
+    }
+
+    .mic-transcribing {
+      font-size: 12px;
+      color: var(--pu);
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 0 8px
+    }
+
+    .mic-transcribing.active {
+      display: flex
+    }
+
+    .wave-dots {
+      display: flex;
+      gap: 3px;
+      align-items: center
+    }
+
+    .wave-dots span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--pu);
+      animation: wave-dot .9s ease-in-out infinite
+    }
+
+    .wave-dots span:nth-child(2) {
+      animation-delay: .15s
+    }
+
+    .wave-dots span:nth-child(3) {
+      animation-delay: .30s
+    }
+
+    @keyframes wave-dot {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(.6);
+        opacity: .4
+      }
+
+      40% {
+        transform: scale(1.2);
+        opacity: 1
+      }
+    }
+
+    @keyframes mic-pulse {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.2)
+      }
+    }
+
+    .cb.recording {
+      border-color: var(--rd) !important;
+      box-shadow: 0 0 0 3px rgba(211, 47, 47, .15)
+    }
+
+    /* =================== MODAIS ===================*/
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .48);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: modal-fade .2s ease;
+      padding: 16px
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      width: min(660px, 100%);
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 28px 72px rgba(0, 0, 0, .24);
+      animation: modal-in .28s cubic-bezier(.34, 1.56, .64, 1)
+    }
+
+    .modal-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--bd);
+      gap: 10px;
+      flex-shrink: 0
+    }
+
+    .modal-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--t1)
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--t2);
+      font-size: 20px;
+      line-height: 1;
+      border-radius: 6px;
+      padding: 4px 9px;
+      transition: background .15s;
+      flex-shrink: 0
+    }
+
+    .modal-close:hover {
+      background: var(--hv);
+      color: var(--t1)
+    }
+
+    .modal-bd {
+      overflow-y: auto;
+      padding: 22px;
+      flex: 1
+    }
+
+    @keyframes modal-fade {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes modal-in {
+      from {
+        opacity: 0;
+        transform: scale(.9) translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0)
+      }
+    }
+
+    @media(max-width:768px) {
+      .sb {
+        display: none
+      }
+
+      .kg {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .cg {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <aside class="sb off" id="sb">
+    <div class="sbi">
+      <div class="sh">
+        <div class="sl">
+          <div
+            style="width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0">
+            <img src="gss.png" style="width:26px;height:26px;object-fit:contain">
+          </div>Ba&uacute; do Saber
+        </div>
+        <button class="ib" onclick="tg()"><i data-lucide="sidebar" size="18"></i></button>
+      </div>
+      <nav class="sm">
+        <div class="mt">Pain&eacute;is Ativos</div>
+        <div class="mi on"><i data-lucide="zap" size="16"></i>Copa 2026 &mdash; Invent&aacute;rio</div>
+        <div class="mi"><i data-lucide="layers" size="16"></i>Cenografia &mdash; Insumos Q2</div>
+        <div class="mi"><i data-lucide="tv" size="16"></i>Grade SBT &mdash; Ibope/Kantar</div>
+        <div class="mi"><i data-lucide="shopping-bag" size="16"></i>Jequiti &mdash; Sazonalidade</div>
+        <div class="mt">Alertas Ativos</div>
+        <div class="mi"><span class="dot dr"></span>Sub-precifica&ccedil;&atilde;o Copa (CPM)</div>
+        <div class="mi"><span class="dot dy"></span>Grade Prime Time &ndash; Rating Queda</div>
+        <div class="mi"><span class="dot dg"></span>Jequiti: Campanha em dia</div>
+        <div class="mt">Hist&oacute;rico</div>
+        <div class="mi"><i data-lucide="message-square" size="15"></i>Revis&atilde;o CPM Break Copa</div>
+        <div class="mi"><i data-lucide="message-square" size="15"></i>Cenografia Reuso Jan/2026</div>
+      </nav>
+      <div class="sf">
+        <div class="pi">
+          <div class="pa">EX</div>
+          <div>Executivo C-Level<div style="font-size:11px;color:var(--t2);font-weight:400">SBT Corporativo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="ma">
+    <div class="tb">
+      <div class="tl"><button class="ib" onclick="tg()"><i data-lucide="sidebar" size="20"></i></button>
+        <div>
+          <div class="tt">Ba&uacute; do Saber</div>
+          <div class="ts">Apoio &agrave; Decis&atilde;o Executiva &middot; Grupo GSS</div>
+        </div>
+      </div>
+      <a class="tbtn" href="gss-teams-prototype.html" target="_blank"><i data-lucide="bot" size="15"></i>Abrir no
+        Teams</a>
+    </div>
+    <div class="ca" id="ca">
+      <div class="em" id="es">
+        <div class="ml"><img src="gss.png" alt="Ba&uacute; do Saber"></div>
+        <h1>Ba&uacute; do Saber</h1>
+        <p>Sistema de apoio &agrave; decis&atilde;o para Executivos e Gestores do Grupo GSS. Conecto dados internos
+          (ERP, Ibope, IM) com sin&aacute;is de mercado para recomenda&ccedil;&otilde;es r&aacute;pidas e embasadas.</p>
+        <div class="cg">
+          <div class="sc" onclick="go('pricing')">
+            <div class="sl2">&#9917; Copa 2026 &mdash; Case Ativo</div>
+            <div class="st">Otimizar precifica&ccedil;&atilde;o do invent&aacute;rio publicit&aacute;rio para os jogos
+              do Brasil</div>
+            <div class="sm2">&#128308; Alerta de sub-precifica&ccedil;&atilde;o &mdash; R$ 68M em risco</div>
+            <span class="src-tag">ERP Invent. &middot; CENP &middot; Ibope</span>
+          </div>
+          <div class="sc" onclick="go('cenografia')">
+            <div class="sl2">&#127748; Cenografia &mdash; Opera&ccedil;&otilde;es Q2</div>
+            <div class="st">Otimizar reuso de insumos entre as produ&ccedil;&otilde;es do trimestre</div>
+            <div class="sm2">&#128308; 45% de redund&acirc;ncia detectada &mdash; R$ 240k salv&aacute;veis</div>
+            <span class="src-tag">ERP Compras &middot; IM Interno &middot; Estoque</span>
+          </div>
+          <div class="sc" onclick="go('grade')">
+            <div class="sl2">&#128250; Grade SBT &mdash; Rating</div>
+            <div class="st">Otimizar grade de programa&ccedil;&atilde;o usando dados Ibope/Kantar para recuperar prime
+              time</div>
+            <div class="sm2">&#128993; Prime time SBT: 6,5 pts m&eacute;dia vs 25 pts da concorr&ecirc;ncia</div>
+            <span class="src-tag">Ibope/Kantar &middot; EPG &middot; Globoplay</span>
+          </div>
+          <div class="sc" onclick="go('jequiti')">
+            <div class="sl2">&#128144; Jequiti &mdash; Sazonalidade</div>
+            <div class="st">Antecipar campanha Dia das M&atilde;es com base em dados hist&oacute;ricos de
+              convers&atilde;o</div>
+            <div class="sm2">&#128993; Concorrentes j&aacute; iniciaram campanhas h&aacute; 2 semanas</div>
+            <span class="src-tag">NielsenIQ &middot; ERP Vendas &middot; CRM</span>
+          </div>
+        </div>
+      </div>
+      <div id="mw" style="display:none;flex-direction:column;flex-grow:1;overflow-y:auto">
+        <div class="mwrap" id="ml"></div>
+      </div>
+    </div>
+    <div class="ia">
+      <div class="cb" id="cb">
+        <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Enviar por voz"><i data-lucide="mic"
+            size="16"></i></button>
+        <span class="mic-timer" id="micTimer"></span>
+        <span class="mic-transcribing" id="micTranscribing">
+          <div class="wave-dots"><span></span><span></span><span></span></div>Transcrevendo...
+        </span>
+        <input class="ci" id="ci" type="text" placeholder="Faça uma pergunta ao Baú do Saber..."
+          onkeypress="if(event.key==='Enter')hs()">
+        <button class="se" onclick="hs()"><i data-lucide="send" size="15"></i></button>
+      </div>
+      <div class="hn">Ba&uacute; do Saber conecta: ERP &middot; Ibope/Kantar &middot; IM Interno &middot; CENP &middot;
+        NielsenIQ. Decis&atilde;o final &eacute; sempre do Gestor.</div>
+    </div>
+  </main>
+  <script>
+    /*
+     * BAÚ DO SABER — Script Principal
+     * ================================
+     * Documentação de contexto: CONTEXT.md (mesmo diretório)
+     *
+     * ARQUITETURA GERAL:
+     *   go(mode) -> chat(txt, mode) -> flow(elem, mode) -> [pcrd|cncrd|gradecrd|jeqcrd|xcrd](elem)
+     *
+     * MODOS DISPONÍVEIS: 'pricing' | 'cenografia' | 'grade' | 'jequiti' | 'custom'
+     *
+     * REGRA CRÍTICA DE DOM:
+     *   Nunca usar b.innerHTML += nas funções de card — isso destrói os .stps animados.
+     *   Sempre usar createElement('div') + appendChild(b).
+     *
+     * DEPENDÊNCIA EXTERNA:
+     *   Lucide Icons via CDN (https://unpkg.com/lucide@latest)
+     *   Chamar lucide.createIcons() após qualquer injeção de [i data-lucide=...] no DOM.
+     */
+
+    /* Renderiza todos os ícones Lucide presentes no DOM no momento do carregamento */
+    lucide.createIcons();
+
+    /* =================== MODAL HELPERS =================== */
+    function createModal(title, badgeHtml) {
+      closeModal(); /* Garante apenas 1 modal ativo */
+      var ov = document.createElement('div');
+      ov.className = 'modal-overlay';
+      ov.id = 'bds-modal';
+      ov.onclick = function (e) { if (e.target === ov) closeModal() };
+
+      var box = document.createElement('div');
+      box.className = 'modal-box';
+
+      var bdg = badgeHtml ? badgeHtml : '';
+      box.innerHTML = '<div class="modal-hd"><div class="modal-title">' + title + ' ' + bdg + '</div><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-bd"></div>';
+      ov.appendChild(box);
+      document.body.appendChild(ov);
+      return box.querySelector('.modal-bd');
+    }
+
+    function closeModal() {
+      var m = document.getElementById('bds-modal');
+      if (m) {
+        /* Remove o dataset.open do botão que originou o modal (se houver) */
+        if (m.dataset.sourceBtnId) {
+          var btn = document.getElementById(m.dataset.sourceBtnId);
+          if (btn) delete btn.dataset.open;
+        }
+        m.remove();
+      }
+    }
+
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+    /* dl(ms) — utilitário de delay assíncrono usado nas animações de flow() e runSchedule() */
+    var dl = function (ms) { return new Promise(function (r) { setTimeout(r, ms) }) };
+
+    /* tg() — toggle da sidebar: adiciona/remove classe .off no <aside id="sb"> */
+    function tg() { document.getElementById('sb').classList.toggle('off') }
+
+    /* hs() — handleSubmit: lê o input #ci e dispara chat() no modo 'custom' (perguntas livres) */
+    function hs() { var v = document.getElementById('ci').value.trim(); if (!v) return; document.getElementById('ci').value = ''; chat(v, 'custom') }
+
+    /*
+     * LABELS — Texto da pergunta do usuário exibida como bolha .mu quando clicado num card.
+     * go(mode) busca aqui antes de chamar chat().
+     * Chaves mapeiam exatamente para as chaves de FLOWS e MEMBERS.
+     */
+    var LABELS = {
+      pricing: 'Analisar precificação do inventário publicitário para Copa 2026',
+      cenografia: 'Otimizar reuso de insumos entre as produções de Cenografia Q2 2026',
+      grade: 'Avaliar a grade de programação do SBT e recuperar audiência no prime time',
+      jequiti: 'Analisar sazonalidade e timing ideal de campanha Jequiti &mdash; Dia das Mães 2026'
+    };
+
+    /* go(mode) — ponto de entrada dos cards da tela inicial. Traduz mode em texto e chama chat() */
+    function go(m) { chat(LABELS[m] || 'Análise executiva', m) }
+
+    /*
+     * chat(txt, mode) — Função central de interação.
+     *   1. Esconde #es (empty state / tela de boas-vindas)
+     *   2. Mostra #mw (message wrapper) com display:flex
+     *   3. Limpa #ml (message list) — apenas uma conversa ativa por vez
+     *   4. Injeta bolha .mu (mensagem do usuário) com o txt recebido
+     *   5. Injeta container .mai (resposta da IA) com .aib vazio
+     *   6. Chama flow(.aib, mode) — ASYNC — que anima os steps e depois injeta o card
+     */
+    function chat(txt, mode) {
+      document.getElementById('es').style.display = 'none';
+      var w = document.getElementById('mw'); w.style.display = 'flex';
+      var ml = document.getElementById('ml'); ml.innerHTML = '';
+      var u = document.createElement('div'); u.className = 'mu'; u.innerHTML = txt; ml.appendChild(u);
+      var ai = document.createElement('div'); ai.className = 'mai';
+      ai.innerHTML = '<div class="ah"><div class="av"><img src="gss.png"></div><div class="an">Ba&uacute; do Saber &mdash; Agentes Ativos</div></div><div class="aib"></div>';
+      ml.appendChild(ai); sb2();
+      flow(ai.querySelector('.aib'), mode); /* .aib é o alvo onde flow() injeta steps e card */
+    }
+
+    /* sb2(container) — scrollBottom: força scroll suave para o final do container (ou modal ativo) */
+    function sb2(container) {
+      if (!container) {
+        var m = document.querySelector('.modal-bd');
+        container = m ? m : document.getElementById('ca');
+      }
+      if (container && container.lastElementChild) {
+        container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      } else if (container) {
+        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+      }
+    }
+    /* =================== AGENT FLOWS BY CASE ===================
+     * FLOWS[mode] = array de steps { t: 'texto do agente', s: 'nome da fonte de dados' }
+     * Cada step é animado por flow() com 1300ms de intervalo.
+     * Após todos os steps, flow() chama a função de card correspondente ao mode.
+     */
+    var FLOWS = {
+      pricing: [
+        { t: 'Agente ERP: lendo invent&aacute;rio de 143 breaks Copa (Fases G + Oitavas)...', s: 'ERP Invent&aacute;rio' },
+        { t: 'Agente Ibope: carregando proje&ccedil;&atilde;o de audi&ecirc;ncia por jogo e hor&aacute;rio...', s: 'Ibope/Kantar' },
+        { t: 'Agente CENP: verificando CPM praticado vs. benchmarks de mercado (Fev/2026)...', s: 'CENP' },
+        { t: 'Agente Comercial (IM): cruzando demanda setorial de Alimentos &amp; Bebidas...', s: 'IM Interno' },
+        { t: 'Agente S&iacute;ntese: calculando gap de receita e recomenda&ccedil;&otilde;es de reprecifica&ccedil;&atilde;o...', s: 'Modelo GSS' }
+      ],
+      cenografia: [
+        { t: 'Agente ERP Compras: lendo pedidos de insumos das 3 produ&ccedil;&otilde;es Q2...', s: 'ERP Compras' },
+        { t: 'Agente Estoque: verificando galp&atilde;o 3 &mdash; itens dispon&iacute;veis vs. itens pedidos...', s: 'Sistema Estoque' },
+        { t: 'Agente Agenda: cruzando cronograma de grava&ccedil;&otilde;es dos Est&uacute;dios 2, 4 e 6...', s: 'IM / Calendar' },
+        { t: 'Agente Especialista (Luiz Torres, Dir. Produ&ccedil;&atilde;o): validando veto de compra...', s: 'IM Interno' },
+        { t: 'Agente S&iacute;ntese: gerando plano de reuso e economia potencial...', s: 'Modelo GSS' }
+      ],
+      grade: [
+        { t: 'Agente Ibope/Kantar: carregando m&eacute;dias de rating SBT por faixa hor&aacute;ria (Dez/Jan)...', s: 'Ibope/Kantar' },
+        { t: 'Agente EPG: lendo grade atual e identificando programas com queda &gt;2 pontos...', s: 'EPG Interno' },
+        { t: 'Agente Concorr&ecirc;ncia: analisando audi&ecirc;ncia Globo, Record e Band para o mesmo slot...', s: 'Kantar Media' },
+        { t: 'Agente Cont&eacute;udo: verificando cat&aacute;logo de programas do +SBT adapt&aacute;veis &agrave; grade...', s: 'Cat&aacute;logo +SBT' },
+        { t: 'Agente S&iacute;ntese: propondo realoca&ccedil;&atilde;o de grade com impacto financeiro estimado...', s: 'Modelo GSS' }
+      ],
+      jequiti: [
+        { t: 'Agente ERP Vendas: lendo hist&oacute;rico de convers&atilde;o Jequiti Dia das M&atilde;es 2022&ndash;2025...', s: 'ERP Vendas' },
+        { t: 'Agente CRM: identificando base ativa e &uacute;ltima compra nos &uacute;ltimos 60 dias...', s: 'CRM Jequiti' },
+        { t: 'Agente NielsenIQ: verificando timing de campanha dos concorrentes Natura e O Botic&aacute;rio...', s: 'NielsenIQ' },
+        { t: 'Agente Ibope: calculando custo de m&iacute;dia TV vs. convers&atilde;o esperada por semana...', s: 'Ibope/Kantar' },
+        { t: 'Agente S&iacute;ntese: definindo janela &oacute;tima de in&iacute;cio de campanha e alocac&atilde;o de budget...', s: 'Modelo GSS' }
+      ],
+      custom: [
+        { t: 'Carregando contexto executivo do Grupo GSS...', s: 'Sistema' },
+        { t: 'Analisando dados internos e refer&ecirc;ncias de mercado...', s: 'Multi-fonte' },
+        { t: 'Processando com agentes especializados Ba&uacute; do Saber...', s: 'Modelo GSS' }
+      ]
+    };
+
+    /*
+     * flow(b, mode) - ASYNC. Núcleo da animação de agentes.
+     *   b    = elemento .aib (agent inner body) onde os steps e o card serão injetados
+     *   mode = chave de FLOWS. Se não existir, usa FLOWS.custom
+     *
+     * Sequência:
+     *   1. Cria div.stps e appenda em b
+     *   2. Para cada step: cria .stp com .si.sp (spinner), aguarda 1300ms, substitui por .stp.dn + .si.ok (check)
+     *   3. Aguarda 500ms após o último step
+     *   4. Despacha para a função de card: pcrd | cncrd | gradecrd | jeqcrd | xcrd
+     *
+     * ARMADILHA: as funções de card DEVEM usar appendChild(b) - nunca innerHTML +=
+     *   pois isso destrói os .stps já existentes no DOM.
+     */
+    async function flow(b, mode) {
+      var steps = FLOWS[mode] || FLOWS.custom;
+      var sd = document.createElement('div'); sd.className = 'stps'; b.appendChild(sd);
+      for (var s of steps) {
+        var el = document.createElement('div'); el.className = 'stp';
+        el.innerHTML = '<div class="si sp"></div><div><span>' + s.t + '</span><div class="src-row">&#128279; Fonte: ' + s.s + '</div></div>';
+        sd.appendChild(el); sb2(); await dl(1300);
+        el.className = 'stp dn';
+        el.innerHTML = '<div class="si ok">&#10003;</div><div><span>' + s.t + '</span><div class="src-row">&#128279; Fonte: ' + s.s + '</div></div>';
+        sb2();
+      }
+      await dl(500);
+      if (mode === 'pricing') pcrd(b);
+      else if (mode === 'cenografia') cncrd(b);
+      else if (mode === 'grade') gradecrd(b);
+      else if (mode === 'jequiti') jeqcrd(b);
+      else xcrd(b);
+      sb2();
+    }
+
+    /* =================== CASE 1: COPA =================== */
+    function pcrd(b) {
+      var el = document.createElement('div'); el.className = 'ec';
+      el.innerHTML = `<div class="ech"><h3><i data-lucide="trending-up" size="15"></i>Parecer &mdash; Invent&aacute;rio Copa 2026</h3><span class="badge bred">A&ccedil;&atilde;o Urgente</span></div><div class="ecb">
+<p class="bt2"><strong>Diagn&oacute;stico:</strong> O invent&aacute;rio de 143 breaks <span class="src-pill">ERP Invent.</span> est&aacute; precificado pela tabela Jan/2026. O CENP <span class="src-pill">CENP</span> indica que o CPM m&eacute;dio para breaks esportivos cresceu <strong>22%</strong> desde a homologa&ccedil;&atilde;o. Proje&ccedil;&atilde;o Ibope <span class="src-pill">Ibope</span> indica audi&ecirc;ncia m&eacute;dia de 38 pts nos jogos do Brasil em grupos.</p>
+<div class="kg">
+<div class="kb"><div class="kl">Invent&aacute;rio Dispon&iacute;vel</div><div class="kv b">143</div><div class="ks">Breaks Copa Grupos + Oitavas</div></div>
+<div class="kb"><div class="kl">Receita Atual (Tabela Base)</div><div class="kv y">R$ 310M</div><div class="ks">CPM sem revis&atilde;o</div></div>
+<div class="kb"><div class="kl">Receita Potencial</div><div class="kv g">R$ 378M</div><div class="ks">&#8593; +R$ 68M captur&aacute;vel</div></div>
+</div>
+<div class="sdv">Recomenda&ccedil;&atilde;o</div>
+<p class="bt2">&#10003; <strong>Revisar CPM Premium</strong> (Breaks 1 e 2, &gt;35 pts) com acr&eacute;scimo de 18&ndash;22% sobre tabela base <span class="src-pill">CENP Benchmark</span>.<br>&#10003; <strong>Pacote Copa + Digital:</strong> TV Aberta + pr&eacute;-roll +SBT com desconto de 10% &mdash; aumenta ocupa&ccedil;&atilde;o e ROI.<br>&#10003; <strong>Prioridade setorial:</strong> Alimentos &amp; Bebidas t&ecirc;m maior prop&ecirc;nso hist&oacute;rico a pagar premium <span class="src-pill">IM Comercial</span>.</p>
+<div class="acts">
+<button class="btn bp" id="btn-sim-copa" onclick="openSim(this)"><i data-lucide="sliders" size="14"></i>Simular Receita</button>
+<button class="btn bpu" id="btn-sch-copa" onclick="openScheduler(this,'copa')"><i data-lucide="calendar" size="14"></i>Agendar no Teams</button>
+<button class="btn bpu" id="btn-det-copa" onclick="openDetail(this)"><i data-lucide="zoom-in" size="14"></i>Detalhar</button>
+</div>
+</div>`;
+      b.appendChild(el); lucide.createIcons();
+    }
+
+    /* =================== CASE 2: CENOGRAFIA =================== */
+    function cncrd(b) {
+      var el = document.createElement('div'); el.className = 'ec';
+      el.innerHTML = `<div class="ech"><h3><i data-lucide="layers" size="15"></i>Parecer &mdash; Cenografia Q2 2026</h3><span class="badge bred">A&ccedil;&atilde;o Urgente</span></div><div class="ecb">
+<p class="bt2"><strong>Diagn&oacute;stico:</strong> Briefings do ERP de Compras <span class="src-pill">ERP Compras</span> revelam 3 produ&ccedil;&otilde;es com pedidos sobrepostos. O agente de estoque <span class="src-pill">Sis. Estoque</span> identificou 45% de insumos j&aacute; dispon&iacute;veis no Galp&atilde;o 3. Luiz Torres (Dir. Produ&ccedil;&atilde;o) <span class="src-pill">IM Interno</span> confirmou via chat que a madeira do set anterior &eacute; compat&iacute;vel.</p>
+<div class="kg">
+<div class="kb"><div class="kl">Custo Pedido Original</div><div class="kv r">R$ 450k</div><div class="ks">3 produ&ccedil;&otilde;es separadas</div></div>
+<div class="kb"><div class="kl">Custo Otimizado</div><div class="kv g">R$ 210k</div><div class="ks">Reuso + painel modular</div></div>
+<div class="kb"><div class="kl">Economia Gerada</div><div class="kv g">53%</div><div class="ks">R$ 240k preservados</div></div>
+</div>
+<div class="sdv">Recomenda&ccedil;&atilde;o</div>
+<p class="bt2">&#10003; <strong>N&atilde;o aprovar</strong> compra de madeira nova para o Podcast &mdash; sucatas do Galp&atilde;o 3 suprem 80% das medidas <span class="src-pill">Sis. Estoque</span>.<br>&#10003; <strong>Painel LED modular</strong> com rod&iacute;zios &mdash; uso alternado Game Show (ter&ccedil;as) e Podcast (quintas) sem conflito <span class="src-pill">IM Calendar</span>.<br>&#10003; <strong>Protocolo de pr&eacute;-aprova&ccedil;&atilde;o:</strong> antes de qualquer nova compra, consulta obrigat&oacute;ria ao Ba&uacute; do Saber.</p>
+<div class="acts">
+<button class="btn bp" onclick="this.innerHTML='&#10003; Aprovado';this.disabled=true"><i data-lucide="check-circle" size="14"></i>Aprovar Otimiza&ccedil;&atilde;o</button>
+<button class="btn bpu" id="btn-sch-cen" onclick="openScheduler(this,'cen')"><i data-lucide="calendar" size="14"></i>Agendar com Chefia</button>
+<button class="btn bo"><i data-lucide="file-text" size="14"></i>Exportar Parecer</button>
+</div>
+</div>`;
+      b.appendChild(el); lucide.createIcons();
+    }
+
+    /* =================== CASE 3: GRADE =================== */
+    function gradecrd(b) {
+      var el = document.createElement('div'); el.className = 'ec';
+      el.innerHTML = `<div class="ech"><h3><i data-lucide="tv" size="15"></i>Parecer &mdash; Grade de Programa&ccedil;&atilde;o SBT</h3><span class="badge bylw">Oportunidade</span></div><div class="ecb">
+<p class="bt2"><strong>Diagn&oacute;stico:</strong> Dados Ibope/Kantar <span class="src-pill">Ibope/Kantar</span> de Dez/2025&ndash;Jan/2026 mostram que o SBT no prime time (20h&ndash;22h) tem m&eacute;dia de <strong>6,5 pontos</strong> de rating (share 13%). Globo no mesmo slot: 25 pontos. O EPG interno <span class="src-pill">EPG SBT</span> aponta que &ldquo;A Tarde &Eacute; Sua&rdquo; reprisado &agrave;s 21h est&aacute; com queda de 2,1 pontos nos &uacute;ltimos 30 dias. Dados do +SBT <span class="src-pill">Cat&aacute;logo +SBT</span> mostram que realities t&ecirc;m 3,2x mais engajamento nessa faixa.</p>
+<div class="kg">
+<div class="kb"><div class="kl">Rating Prime Time Atual</div><div class="kv r">6,5 pts</div><div class="ks">M&eacute;dia Dez/Jan (Ibope)</div></div>
+<div class="kb"><div class="kl">Rating Projetado (novo formato)</div><div class="kv g">8,2 pts</div><div class="ks">+1,7 pts via realoca&ccedil;&atilde;o</div></div>
+<div class="kb"><div class="kl">Receita Adicional/Ano</div><div class="kv g">R$ 22M</div><div class="ks">+1 pt rating = ~R$ 13M/ano (CENP)</div></div>
+</div>
+<div class="sdv">Recomenda&ccedil;&atilde;o</div>
+<p class="bt2">&#10003; <strong>Mover reprises de &ldquo;A Tarde &Eacute; Sua&rdquo;</strong> das 21h para as 23h30 &mdash; p&uacute;blico 45+ aceita melhor nesse slot <span class="src-pill">Kantar Perfil</span>.<br>&#10003; <strong>Inserir formato reality 60 min</strong> &agrave;s 21h (cat&aacute;logo +SBT j&aacute; tem 4 op&ccedil;&otilde;es aprovadas) &mdash; audi&ecirc;ncia projetada: +2,1 pts <span class="src-pill">EPG + Ibope</span>.<br>&#10003; <strong>Renegociar cotas</strong> do prime time ap&oacute;s primeira semana de dados reais &mdash; alerta autom&aacute;tico configurado.</p>
+<div class="acts">
+<button class="btn bp" id="btn-sch-grade" onclick="openScheduler(this,'grade')"><i data-lucide="calendar" size="14"></i>Agendar com Dir. Programa&ccedil;&atilde;o</button>
+<button class="btn bo"><i data-lucide="file-text" size="14"></i>Exportar Proposta</button>
+</div>
+</div>`;
+      b.appendChild(el); lucide.createIcons();
+    }
+
+    /* =================== CASE 4: JEQUITI =================== */
+    function jeqcrd(b) {
+      var el = document.createElement('div'); el.className = 'ec';
+      el.innerHTML = `<div class="ech"><h3><i data-lucide="shopping-bag" size="15"></i>Parecer &mdash; Jequiti Sazonalidade Dia das M&atilde;es</h3><span class="badge bylw">Aten&ccedil;&atilde;o</span></div><div class="ecb">
+<p class="bt2"><strong>Diagn&oacute;stico:</strong> ERP de Vendas <span class="src-pill">ERP Vendas</span> mostra que Dia das M&atilde;es 2025 gerou R$ 340M para Jequiti, com 67% via TV Shop. NielsenIQ <span class="src-pill">NielsenIQ</span> confirma que Natura e O Botic&aacute;rio j&aacute; iniciaram campanhas TV h&aacute; 14 dias. CRM <span class="src-pill">CRM Jequiti</span> indica base ativa de 1,2M clientes sem contato em 45 dias. Hist&oacute;rico Ibope <span class="src-pill">Ibope</span> mostra que iniciar campanha 3 semanas antes = +23% de convers&atilde;o vs. 2 semanas.</p>
+<div class="kg">
+<div class="kb"><div class="kl">Vendas DM 2025</div><div class="kv b">R$ 340M</div><div class="ks">67% via TV Shop (ERP)</div></div>
+<div class="kb"><div class="kl">Janela Ideal de In&iacute;cio</div><div class="kv g">3 semanas</div><div class="ks">vs. 2 semanas dos concorr.</div></div>
+<div class="kb"><div class="kl">Receita Incremental Estim.</div><div class="kv g">+R$ 28M</div><div class="ks">Se campanha iniciada agora</div></div>
+</div>
+<div class="sdv">Recomenda&ccedil;&atilde;o</div>
+<p class="bt2">&#10003; <strong>Iniciar campanha imediatamente</strong> &mdash; cada semana de atraso custa ~R$ 7M em convers&atilde;o perdida <span class="src-pill">Modelo NielsenIQ</span>.<br>&#10003; <strong>Ativar base CRM</strong> de 1,2M via push + e-mail com oferta antecipada &mdash; custo de R$ 180k, ROI projetado de 80x <span class="src-pill">CRM Jequiti</span>.<br>&#10003; <strong>Priorizar TV Shop das 22h30</strong> nos 5 dias antes do Dia das M&atilde;es &mdash; slot hist&oacute;rico de maior convers&atilde;o <span class="src-pill">ERP Hist. + Ibope</span>.</p>
+<div class="acts">
+<button class="btn bp" onclick="openScheduler(this,'jeq')"><i data-lucide="calendar" size="14"></i>Agendar com Marketing</button>
+<button class="btn bo"><i data-lucide="file-text" size="14"></i>Exportar Proposta</button>
+</div>
+<div class="sched-area"></div>
+</div>`;
+      b.appendChild(el); lucide.createIcons();
+    }
+
+    function xcrd(b) { var el = document.createElement('div'); el.className = 'ec'; el.innerHTML = `<div class="ech"><h3><i data-lucide="cpu" size="15"></i>Ba&uacute; do Saber</h3></div><div class="ecb"><p class="bt2">Selecione um dos 4 casos para ver o parecer executivo detalhado.</p><div class="acts"><button class="btn bp" onclick="go('pricing')">&#9917; Copa 2026</button><button class="btn bo" onclick="go('cenografia')">&#127748; Cenografia</button><button class="btn bo" onclick="go('grade')">&#128250; Grade SBT</button><button class="btn bo" onclick="go('jequiti')">&#128144; Jequiti</button></div></div>`; b.appendChild(el); lucide.createIcons(); }
+
+    /* =================== SIMULATOR ===================
+     * openSim(btn) — Abre o simulador de receita (somente no case Copa/pricing).
+     *   - Usa criarModal() para renderizar numa caixa centralizada.
+     *   - btn.dataset.open evita dupla abertura enfileirada.
+     */
+    function openSim(btn) {
+      if (btn.dataset.open) return;
+      btn.dataset.open = '1';
+      var uid = 'sim_' + Date.now();
+      var mbd = createModal('Simular Receita Copa 2026', '<span class="badge bgrn">R$ 68M potencial</span>');
+      mbd.parentElement.dataset.sourceBtnId = btn.id;
+
+      mbd.innerHTML = '<div class="sim-c"><h4><i data-lucide="sliders" size="14"></i> Ajuste Analítico de Inventário</h4><label style="font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;margin-bottom:6px">Breaks com CPM revisado (+20%) <span id="' + uid + '_sv">60</span>%</label><input type="range" min="0" max="100" value="60" style="width:100%;accent-color:var(--bl);margin-bottom:12px" oninput="updS(this.value,\'' + uid + '\')"><div class="sr"><div class="sl3">Receita Incremental Projetada</div><div class="sv" id="' + uid + '_sv2">+R$ 40,8M</div><div style="font-size:11px;color:var(--t2);margin-top:3px">Acima da proje&ccedil;&atilde;o base de R$ 310M</div></div></div>';
+      lucide.createIcons();
+    }
+    function updS(v, uid) { document.getElementById(uid + '_sv').textContent = v; document.getElementById(uid + '_sv2').textContent = '+R$ ' + (68 * v / 100).toFixed(1) + 'M' }
+
+    /* =================== TEAMS MEMBERS ===================
+     * MEMBERS[key] — Lista de participantes sugeridos por reunião.
+     *   Cada membro: { i: 'iniciais', n: 'nome completo', r: 'cargo', c: '#cor-hex' }
+     *   Chaves: copa | cen | grade | jeq
+     *   Usado por openScheduler() e renderMeeting()
+     *
+     * AGENDAS[key] — Pauta pré-definida da reunião (texto livre), exibida no .ag-box
+     *
+     * MEETINGS[key] — Parâmetro ?meeting= para o link do Teams prototype
+     *   Link gerado: gss-teams-prototype.html?meeting=<valor>
+     */
+    var MEMBERS = {
+      copa: [{ i: 'RA', n: 'Ricardo Almeida', r: 'VP Comercial', c: '#002855' }, { i: 'PF', n: 'Patricia Fonseca', r: 'Diretora de M&iacute;dia', c: '#5B5FC7' }, { i: 'CM', n: 'Carlos Moura', r: 'Diretor Jur&iacute;dico', c: '#008751' }, { i: 'FC', n: 'Fernanda Costa', r: 'Diretora Digital (+SBT)', c: '#D32F2F' }, { i: 'AB', n: 'Ana Beatriz Lima', r: 'Ger. Estrat&eacute;gia Copa', c: '#F2A900' }],
+      cen: [{ i: 'LT', n: 'Luiz Torres', r: 'Diretor de Produ&ccedil;&atilde;o', c: '#002855' }, { i: 'MS', n: 'Marina Souza', r: 'Ger. de Cenografia', c: '#5B5FC7' }, { i: 'RP', n: 'Roberto Pinheiro', r: 'Coord. de Compras', c: '#008751' }, { i: 'JA', n: 'Julia Ara&uacute;jo', r: 'Analista de Budget', c: '#D32F2F' }],
+      grade: [{ i: 'FM', n: 'Felipe Menezes', r: 'Diretor de Programa&ccedil;&atilde;o', c: '#002855' }, { i: 'SR', n: 'Sandra Rocha', r: 'Ger. de Conte&uacute;do', c: '#5B5FC7' }, { i: 'BC', n: 'Bruno Carvalho', r: 'Analista Ibope/Kantar', c: '#008751' }, { i: 'PF', n: 'Patricia Fonseca', r: 'Diretora de M&iacute;dia', c: '#D32F2F' }],
+      jeq: [{ i: 'RV', n: 'Roberto Alves', r: 'VP Jequiti', c: '#002855' }, { i: 'CM2', n: 'Claudia Martins', r: 'Diretora de Marketing', c: '#5B5FC7' }, { i: 'DS', n: 'Diego Santos', r: 'Ger. CRM', c: '#008751' }, { i: 'FC', n: 'Fernanda Costa', r: 'Dir. Digital (+SBT)', c: '#D32F2F' }]
+    };
+    var AGENDAS = {
+      copa: 'Aprova&ccedil;&atilde;o de ajuste de CPM Copa 2026 + valida&ccedil;&atilde;o do Plano B Comercial + distributui&ccedil;&atilde;o cross-platform.',
+      cen: 'Aprova&ccedil;&atilde;o do plano de reuso de insumos Q2 + bloqueio do Galp&atilde;o 3 + cronograma integrado de est&uacute;dios.',
+      grade: 'Aprova&ccedil;&atilde;o de realoca&ccedil;&atilde;o da grade prime time + defini&ccedil;&atilde;o de formato para 21h + metas de rating.',
+      jeq: 'Aprova&ccedil;&atilde;o de in&iacute;cio imediato de campanha + ativa&ccedil;&atilde;o CRM + aloca&ccedil;&atilde;o de slots TV Shop.'
+    };
+    var MEETINGS = { copa: 'copa2026', cen: 'cenografia', grade: 'grade-sbt', jeq: 'jequiti' };
+
+    /* MS Graph mock directory */
+    var GRAPH_DIR = [
+      { i: 'MN', n: 'Marcos Nunes', r: 'Dir. Financeiro GSS', c: '#6B2D8B' },
+      { i: 'BL', n: 'Beatriz Lopes', r: 'Ger. Jur&iacute;dica', c: '#C76B00' },
+      { i: 'TC', n: 'Thiago Castro', r: 'VP Tecnologia (TTI)', c: '#006B5B' },
+      { i: 'KS', n: 'Karina Silva', r: 'Analista de BI', c: '#8B0000' },
+      { i: 'WO', n: 'Wagner Oliveira', r: 'Coord. de M&iacute;dia', c: '#3D5A80' },
+      { i: 'JM', n: 'Joana Melo', r: 'Ger. de Projetos', c: '#6B4226' }
+    ];
+
+    /* =================== SCHEDULER (with participant selector) =================== */
+    function openScheduler(btn, key) {
+      if (btn.dataset.open) return;
+      btn.dataset.open = '1';
+      var mbd = createModal('Agendar no Teams', '<span class="badge" style="background:#5B5FC7;color:#fff">Microsoft Teams</span>');
+      mbd.parentElement.dataset.sourceBtnId = btn.id;
+
+      var members = MEMBERS[key] || MEMBERS.copa;
+      var checked = members.map(function (m, i) { return '<label style="display:flex;align-items:center;gap:10px;padding:8px;border:1px solid var(--bd);border-radius:10px;cursor:pointer;background:#fff;transition:background .15s" onmouseenter="this.style.background=\'var(--hv)\'" onmouseleave="this.style.background=\'#fff\'"><input type="checkbox" checked data-idx="' + i + '" style="width:16px;height:16px;accent-color:var(--pu);cursor:pointer"><div style="width:34px;height:34px;border-radius:50%;background:' + m.c + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">' + m.i + '</div><div><div style="font-size:13px;font-weight:700">' + m.n + '</div><div style="font-size:11.5px;color:var(--t2)">' + m.r + '</div></div></label>'; }).join('');
+      var uid = 'sched_' + Date.now();
+      mbd.innerHTML = `
+<div style="border:1px solid #C7D2F5;border-radius:12px;overflow:hidden">
+<div style="background:var(--pu);color:#fff;padding:12px 16px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px"><i data-lucide="users" size="15"></i>Configurar Reuni&atilde;o no Microsoft Teams</div>
+<div style="padding:18px;background:#fff">
+<div style="font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Participantes Sugeridos pelo Ba&uacute; do Saber</div>
+<div id="${uid}_list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:14px">${checked}</div>
+<div style="background:#F0F4FF;border-radius:8px;padding:10px 12px;margin-bottom:14px">
+<div style="font-size:11.5px;font-weight:700;color:var(--pu);display:flex;align-items:center;gap:6px;margin-bottom:8px"><i data-lucide="search" size="13"></i>Adicionar Pessoa via Microsoft Graph</div>
+<div style="position:relative">
+<input id="${uid}_search" type="text" placeholder="Buscar por nome ou e-mail..." style="width:100%;padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;outline:none;font-family:inherit" oninput="graphSearch(this,'${uid}')">
+<div id="${uid}_results" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid var(--bd);border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);z-index:100;overflow:hidden"></div>
+</div>
+</div>
+<div id="${uid}_added" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px"></div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+<label style="font-size:12.5px;font-weight:700;color:var(--t2)">Data e Hora Sugerida:</label>
+<div style="background:#F8F9FA;border:1px solid var(--bd);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:700;color:var(--bl)">&#128197; Amanh&atilde;, 14h00 &mdash; 60 min</div>
+</div>
+<button class="btn bpu" style="width:100%;justify-content:center" onclick="runSchedule(this,'${uid}','${key}')"><i data-lucide="send" size="14"></i>Confirmar e Agendar Automaticamente</button>
+<div style="font-size:11px;color:var(--t2);text-align:center;margin-top:8px">&#128279; Conectado ao Microsoft Graph API &middot; Calend&aacute;rios verificados em tempo real</div>
+</div></div>
+<div id="${uid}_result" style="margin-top:16px"></div>`;
+      lucide.createIcons();
+    }
+
+    function graphSearch(input, uid) {
+      var v = input.value.trim().toLowerCase();
+      var box = document.getElementById(uid + '_results');
+      if (v.length < 2) { box.style.display = 'none'; return; }
+      var matches = GRAPH_DIR.filter(function (p) { return p.n.toLowerCase().includes(v) || p.r.toLowerCase().includes(v) });
+      if (!matches.length) { box.style.display = 'none'; return; }
+      box.innerHTML = matches.map(function (p) {
+        return '<div onclick="addPerson(\'' + uid + '\',\'' + p.i + '\',\'' + p.n + '\',\'' + p.r + '\',\'' + p.c + '\')" style="display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--bd);transition:background .15s" onmouseenter="this.style.background=\'var(--hv)\'" onmouseleave="this.style.background=\'\'"><div style="width:30px;height:30px;border-radius:50%;background:' + p.c + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">' + p.i + '</div><div><div style="font-size:13px;font-weight:700">' + p.n + '</div><div style="font-size:11px;color:var(--t2)">' + p.r + ' &middot; Microsoft Graph</div></div></div>';
+      }).join('');
+      box.style.display = 'block';
+    }
+
+    function addPerson(uid, i, n, r, c) {
+      document.getElementById(uid + '_results').style.display = 'none';
+      document.getElementById(uid + '_search').value = '';
+      var added = document.getElementById(uid + '_added');
+      if (document.getElementById(uid + '_p_' + i)) return;
+      var tag = document.createElement('div'); tag.id = uid + '_p_' + i;
+      tag.style.cssText = 'display:inline-flex;align-items:center;gap:7px;padding:6px 10px;background:var(--hv);border:1px solid var(--bd);border-radius:20px;font-size:12.5px;font-weight:600';
+      tag.innerHTML = '<div style="width:26px;height:26px;border-radius:50%;background:' + c + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">' + i + '</div>' + n + ' <span style="font-size:10px;color:var(--pu);font-weight:700">[Graph]</span> <span onclick="this.parentElement.remove()" style="cursor:pointer;color:var(--t2);margin-left:4px;font-size:16px;line-height:1">&times;</span>';
+      added.appendChild(tag); sb2();
+    }
+
+    async function runSchedule(btn, uid, key) {
+      btn.disabled = true; btn.innerHTML = '<div class="si sp" style="border-width:2px;width:18px;height:18px"></div>Agendando...';
+      var container = document.getElementById(uid + '_result');
+      var tmSteps = [
+        'Coletando participantes selecionados e adicionados via Microsoft Graph...',
+        'Verificando disponibilidade de calend&aacute;rios (Microsoft Graph API)...',
+        'Horario confirmado: Amanh&atilde;, 14h00 &mdash; todos dispon&iacute;veis...',
+        'Criando evento no Microsoft Teams com link de videoconfer&ecirc;ncia...',
+        'Convites enviados com pauta e contexto do Ba&uacute; do Saber!'
+      ];
+      var sd = document.createElement('div'); sd.className = 'tm-steps';
+      sd.innerHTML = '<div class="tm-hd"><i data-lucide="loader" size="14"></i>Agendamento Autom&aacute;tico em Andamento...</div>';
+      container.appendChild(sd); lucide.createIcons();
+      for (var s of tmSteps) {
+        var el = document.createElement('div'); el.className = 'stp';
+        el.innerHTML = '<div class="si sp"></div><span>' + s + '</span>';
+        sd.appendChild(el); await dl(1400);
+        el.className = 'stp dn'; el.innerHTML = '<div class="si ok">&#10003;</div><span>' + s + '</span>';
+      }
+      await dl(500);
+      renderMeeting(container, key);
+      btn.innerHTML = '&#10003; Agendado com Sucesso';
+    }
+
+    function renderMeeting(container, key) {
+      var members = MEMBERS[key] || MEMBERS.copa;
+      var agenda = AGENDAS[key] || 'Pauta a definir.';
+      var link = 'gss-teams-prototype.html?meeting=' + MEETINGS[key];
+      var avs = members.map(function (m) { return '<div class="ptc"><div class="ptc-av" style="background:' + m.c + '">' + m.i + '</div><div class="ptc-nm">' + m.n.split(' ').slice(0, 2).join(' ') + '</div><div class="ptc-rg">' + m.r + '</div></div>'; }).join('');
+      container.insertAdjacentHTML('beforeend', `<div class="mc"><div class="mc-hd"><h4><i data-lucide="video" size="15"></i>Reuni&atilde;o Agendada com Sucesso</h4><div class="mc-sub">Criado automaticamente pelo Ba&uacute; do Saber via Microsoft Graph</div></div><div class="mc-bd"><div class="mc-meta"><span><i data-lucide="calendar" size="13"></i>Amanh&atilde;, 14h00</span><span><i data-lucide="clock" size="13"></i>60 minutos</span><span><i data-lucide="users" size="13"></i>${members.length} participantes</span><span><i data-lucide="video" size="13"></i>Microsoft Teams</span></div><div class="ptcs">${avs}</div><div class="ag-box"><strong>Pauta:</strong> ${agenda}</div><div class="acts"><a class="btn bpu" href="${link}" target="_blank" style="width:100%;justify-content:center"><i data-lucide="external-link" size="14"></i>Abrir no Teams</a></div></div></div>`);
+      lucide.createIcons();
+    }
+
+    /* =================== DETALHAR — Copa 2026 ===================
+     * Dados estáticos de breakdown por fase e setor.
+     * openDetail(btn) usa dataset.open como guard (evita dupla abertura).
+     * Mini-flow de 3 steps com 700ms cada antes de revelar o breakdown.
+     */
+    var COPA_PHASES = [
+      { fase: 'Fase de Grupos', breaks: 72, cpmAtual: 'R$ 48k', cpmSug: 'R$ 57k', delta: '+18%', risco: 'alto' },
+      { fase: 'Oitavas de Final', breaks: 32, cpmAtual: 'R$ 62k', cpmSug: 'R$ 77k', delta: '+24%', risco: 'alto' },
+      { fase: 'Quartas de Final', breaks: 16, cpmAtual: 'R$ 78k', cpmSug: 'R$ 95k', delta: '+22%', risco: 'medio' },
+      { fase: 'Semi + Final', breaks: 23, cpmAtual: 'R$ 95k', cpmSug: 'R$ 118k', delta: '+24%', risco: 'baixo' }
+    ];
+
+    var COPA_SECTORS = [
+      { setor: 'Alimentos & Bebidas', prop: 92, cpm: 'R$ 62k' },
+      { setor: 'Financeiro', prop: 78, cpm: 'R$ 58k' },
+      { setor: 'Varejo', prop: 65, cpm: 'R$ 52k' }
+    ];
+
+    async function openDetail(btn) {
+      if (btn.dataset.open) return;
+      btn.dataset.open = '1';
+
+      var origHtml = btn.innerHTML;
+      btn.innerHTML = '<div class="si sp" style="border-width:2px;width:16px;height:16px;flex-shrink:0"></div> Detalhando...';
+
+      var mbd = createModal('Detalhamento &mdash; Copa 2026', '<span class="badge bred">A&ccedil;&atilde;o Urgente</span>');
+      mbd.parentElement.dataset.sourceBtnId = btn.id;
+
+      /* ---- Mini-flow de aprofundamento ---- */
+      var miniSteps = [
+        { t: 'Agente ERP: segmentando 143 breaks por fase e rating projetado...', s: 'ERP Inventário' },
+        { t: 'Agente CENP: cruzando CPM praticado vs. benchmark por nível de audiência...', s: 'CENP / Ibope' },
+        { t: 'Agente Comercial: identificando propensidade de fechamento por setor...', s: 'IM Comercial' }
+      ];
+      var sd = document.createElement('div'); sd.className = 'detail-mini-steps'; mbd.appendChild(sd);
+      for (var s of miniSteps) {
+        var el = document.createElement('div'); el.className = 'stp';
+        el.innerHTML = '<div class="si sp"></div><div><span>' + s.t + '</span><div class="src-row">&#128279; Fonte: ' + s.s + '</div></div>';
+        sd.appendChild(el); await dl(700);
+        el.className = 'stp dn';
+        el.innerHTML = '<div class="si ok">&#10003;</div><div><span>' + s.t + '</span><div class="src-row">&#128279; Fonte: ' + s.s + '</div></div>';
+      }
+      await dl(400);
+
+      /* ---- Breakdown por Fase ---- */
+      var phaseHtml = COPA_PHASES.map(function (p) {
+        return '<div class="phase-row">'
+          + '<div class="phase-name">' + p.fase + '</div>'
+          + '<div class="phase-breaks">' + p.breaks + ' breaks</div>'
+          + '<div class="phase-cpm-old">' + p.cpmAtual + '</div>'
+          + '<div class="phase-cpm-new">' + p.cpmSug + '</div>'
+          + '<div class="phase-delta">' + p.delta + '</div>'
+          + '<span class="risk-chip ' + p.risco + '">' + p.risco + '</span>'
+          + '</div>';
+      }).join('');
+
+      /* ---- Breakdown por Setor ---- */
+      var sectorHtml = COPA_SECTORS.map(function (s) {
+        return '<div class="sector-row">'
+          + '<div class="sector-name">' + s.setor + '</div>'
+          + '<div class="sector-bar-wrap"><div class="sector-bar-fill" style="width:0%" data-w="' + s.prop + '%"></div></div>'
+          + '<div class="sector-cpm">' + s.cpm + '</div>'
+          + '</div>';
+      }).join('');
+
+      var box = document.createElement('div');
+      box.innerHTML = '<div class="ec" style="border:none;box-shadow:none;padding:0">'
+        + '<div class="ecb" style="padding:0">'
+        + '<div class="phase-section">'
+        + '<div class="phase-section-title">&#9917; Breakdown por Fase</div>'
+        + '<div style="display:flex;gap:6px;font-size:10.5px;font-weight:700;color:var(--t2);padding:0 14px;margin-bottom:4px">'
+        + '<div style="flex:1">Fase</div><div style="width:48px;text-align:center">Breaks</div>'
+        + '<div style="width:68px;text-align:right">CPM Atual</div><div style="width:68px;text-align:right">CPM Sug.</div>'
+        + '<div style="width:48px;text-align:right">Delta</div><div style="width:52px;text-align:right">Risco</div></div>'
+        + '<div class="phase-table">' + phaseHtml + '</div>'
+        + '</div>'
+        + '<div class="phase-section">'
+        + '<div class="phase-section-title">&#127959; Propensidade por Setor</div>'
+        + sectorHtml
+        + '</div>'
+        + '<div class="detail-risk-note" style="margin-top:10px">&#9888; <strong>Janela comercial crítica:</strong> negociações devem ser fechadas at&eacute; 15/05/2026 para garantir tabela de CPM revisado na Fase de Grupos. Setores com propensidade &gt;75% devem ser abordados esta semana.'
+        + '</div></div></div>';
+      mbd.appendChild(box);
+      lucide.createIcons();
+
+      /* Anima as barras de setor com requestAnimationFrame para garantir transição CSS */
+      setTimeout(function () {
+        box.querySelectorAll('.sector-bar-fill').forEach(function (b) { b.style.width = b.dataset.w; });
+      }, 80);
+
+      btn.innerHTML = origHtml;
+    }
+
+    /* =================== MICROFONE — ÁUDIO + TRANSCRIÇÃO ===================
+     * Estratégia:
+     *   1) Tenta usar SpeechRecognition real (Chrome/Edge — Web Speech API)
+     *   2) Se não disponível, usa mock de transcrição após delay simulado
+     *
+     * Estados: isRecording (bool) | recTimer (interval id) | recSeconds (contador)
+     * recognition (SpeechRecognition instance quando disponível)
+     */
+    var isRecording = false;
+    var recTimer = null;
+    var recSeconds = 0;
+    var recognition = null;
+
+    /* Transcrições simuladas usadas como fallback quando a Web Speech API não está disponível */
+    var AUDIO_MOCKS = [
+      'Qual o impacto financeiro se revisarmos o CPM dos breaks da final?',
+      'Comparar o CPM atual da Copa com o benchmark CENP de mercado.',
+      'Quais setores têm maior propensidade a fechar agora para a Copa?',
+      'Simular receita com 80% dos breaks reprecificados na fase de grupos.',
+      'Qual é a janela ideal para fechamento comercial dos pacotes Copa + Digital?'
+    ];
+
+    function toggleMic() {
+      if (isRecording) stopRec();
+      else startRec();
+    }
+
+    function startRec() {
+      isRecording = true;
+      recSeconds = 0;
+      var btn = document.getElementById('micBtn');
+      var cb = document.getElementById('cb');
+      var timer = document.getElementById('micTimer');
+      btn.classList.add('recording');
+      btn.innerHTML = '<i data-lucide="mic-off" size="16"></i>';
+      cb.classList.add('recording');
+      timer.classList.add('active');
+      lucide.createIcons();
+
+      /* Atualiza o timer a cada segundo */
+      recTimer = setInterval(function () {
+        recSeconds++;
+        var m = Math.floor(recSeconds / 60);
+        var s = recSeconds % 60;
+        timer.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        if (recSeconds >= 30) stopRec(); /* Limita a 30 segundos */
+      }, 1000);
+
+      /* Tenta usar Web Speech API real (Chrome/Edge) */
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SR) {
+        recognition = new SR();
+        recognition.lang = 'pt-BR';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.onresult = function (e) {
+          var txt = e.results[0][0].transcript;
+          stopRec();
+          transcribe(txt);
+        };
+        recognition.onerror = function () { stopRec(); transcribeMock(); };
+        recognition.onend = function () { if (isRecording) stopRec(); };
+        recognition.start();
+      }
+      /* Se não tiver API real, para automaticamente em 4s e usa mock */
+      else {
+        setTimeout(function () { if (isRecording) { stopRec(); transcribeMock(); } }, 4000);
+      }
+    }
+
+    function stopRec() {
+      if (!isRecording) return;
+      isRecording = false;
+      clearInterval(recTimer);
+      var btn = document.getElementById('micBtn');
+      var cb = document.getElementById('cb');
+      var timer = document.getElementById('micTimer');
+      var trans = document.getElementById('micTranscribing');
+      btn.classList.remove('recording');
+      btn.innerHTML = '<i data-lucide="mic" size="16"></i>';
+      cb.classList.remove('recording');
+      timer.classList.remove('active');
+      lucide.createIcons();
+      if (recognition) { try { recognition.stop(); } catch (e) { } recognition = null; }
+      /* Mostra o estado "Transcrevendo..." por 1,8s antes de preencher o input */
+      trans.classList.add('active');
+      setTimeout(function () { trans.classList.remove('active'); }, 1800);
+    }
+
+    function transcribeMock() {
+      var txt = AUDIO_MOCKS[Math.floor(Math.random() * AUDIO_MOCKS.length)];
+      setTimeout(function () { transcribe(txt); }, 1800);
+    }
+
+    /* transcribe(txt) — preenche o input com o texto e envia automaticamente */
+    function transcribe(txt) {
+      var ci = document.getElementById('ci');
+      ci.value = txt;
+      ci.focus();
+      /* Pequeno delay para o usuário ver o texto antes do envio */
+      setTimeout(function () { hs(); }, 400);
+    }
+
+  </script>
+</body>
+
+</html>
