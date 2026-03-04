@@ -1915,9 +1915,25 @@
             <div style="font-size: 16px; font-weight: 700; color: #FFD600;">${d.verdict}</div>
           </div>
         </div>
+        <div id="silvio-extra"></div>
         <button class="btn bp" style="width: 100%; justify-content: center;" onclick="closeModal()">Entendido, Patrão!</button>
       `;
       lucide.createIcons();
+      if (mode === 'pricing' || mode === 'cenografia' || mode === 'grade') {
+        var extra = mbd.querySelector('#silvio-extra');
+        var abtn = document.createElement('button');
+        abtn.className = 'btn bo';
+        abtn.style.width = '100%';
+        abtn.style.justifyContent = 'center';
+        abtn.id = 'btn-audio-silvio';
+        abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio';
+        extra.appendChild(abtn);
+        var src = mode === 'pricing' ? 'voz_silvio_2.mp3' : (mode === 'cenografia' ? 'voz_silvio_1.mp3' : 'voz_silvio_3.mp3');
+        var audio = new Audio(src);
+        abtn.onclick = function(){ if(audio.paused){ audio.play(); abtn.innerHTML = '<i data-lucide="pause" size="14"></i> Pausar &aacute;udio'; } else { audio.pause(); audio.currentTime = 0; abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio'; } lucide.createIcons(); };
+        audio.onended = function(){ abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio'; lucide.createIcons(); };
+        lucide.createIcons();
+      }
     }
 
     /* =================== SIMULATOR ===================
