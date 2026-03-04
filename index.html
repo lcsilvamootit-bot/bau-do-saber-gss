@@ -306,6 +306,9 @@
       line-height: 1.6;
       margin-bottom: 36px
     }
+    .ttwrap{position:relative;display:inline-block}
+    .ttbox{position:absolute;left:50%;top:100%;transform:translate(-50%,6px);background:#fff;color:var(--t1);border:1px solid var(--bd);padding:10px 12px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);font-size:12.5px;line-height:1.5;min-width:260px;max-width:420px;opacity:0;visibility:hidden;transition:opacity .15s ease, transform .15s ease;z-index:50}
+    .ttwrap:hover .ttbox{opacity:1;visibility:visible;transform:translate(-50%,10px)}
 
     .cg {
       display: grid;
@@ -1429,8 +1432,7 @@
       <div class="em" id="es">
         <div class="ml"><img src="gss.png" alt="Ba&uacute; do Saber"></div>
         <h1>Ba&uacute; do Saber</h1>
-        <p>Sistema de apoio &agrave; decis&atilde;o para Executivos e Gestores do Grupo GSS. Conecto dados internos
-          (ERP, Ibope, IM) com sin&aacute;is de mercado para recomenda&ccedil;&otilde;es r&aacute;pidas e embasadas.</p>
+        <p><span class="ttwrap">Sistema de apoio &agrave; decis&atilde;o para Executivos e Gestores do Grupo GSS.<span class="ttbox">Conecto dados internos (ERP, Ibope, IM) com sin&aacute;is de mercado para recomenda&ccedil;&otilde;es r&aacute;pidas e embasadas.</span></span></p>
         <div class="cg">
           <div class="sc" onclick="go('pricing')">
             <div class="sl2">&#9917; Copa 2026 &mdash; Case Ativo</div>
@@ -1465,13 +1467,11 @@
             </div>
           </div>
           <div class="sc" onclick="go('jequiti')">
-            <div class="sl2">&#128144; Jequiti &mdash; Sazonalidade</div>
-            <div class="st">Antecipar campanha Dia das M&atilde;es com base em dados hist&oacute;ricos de
-              convers&atilde;o</div>
-            <div class="sm2">&#128993; Concorrentes j&aacute; iniciaram campanhas h&aacute; 2 semanas</div>
+            <div class="sl2">&#128202; DASHBOARD</div>
+            <div class="st">Conhe&ccedil;a nosso indicadores atuais</div>
             <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:2px">
-              <span class="src-tag external">NielsenIQ</span>
-              <span class="src-tag internal">ERP Vendas</span>
+              <span class="src-tag internal">IM Interno</span>
+              <span class="src-tag external">Ibope</span>
               <span class="src-tag internal">CRM</span>
             </div>
           </div>
@@ -1496,6 +1496,9 @@
               </button>
               <button class="share-item" onclick="shareTo('copy')">
                 <i data-lucide="copy" size="14"></i> Copiar Resumo
+              </button>
+              <button class="share-item" onclick="shareTo('pdf')">
+                <i data-lucide="file-text" size="14"></i> PDF
               </button>
             </div>
           </div>
@@ -1597,6 +1600,20 @@
         navigator.clipboard.writeText(text + "\n" + url).then(function () {
           alert('Resumo copiado para a área de transferência!');
         });
+      } else if (target === 'pdf') {
+        var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+        var dt = new Date().toLocaleString('pt-BR');
+        var w = window.open('', '_blank');
+        if (w) {
+          var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><title>' + esc(title) + '</title><style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;padding:32px;color:#111}h1{font-size:20px;margin:0 0 8px;color:#002855}h2{font-size:14px;margin:0 0 18px;color:#5E5E5E}p{font-size:13.5px;line-height:1.6;white-space:pre-wrap}hr{border:none;border-top:1px solid #e0e0e0;margin:20px 0}footer{font-size:11px;color:#666}</style></head><body><h1>Baú do Saber — Resumo</h1><h2>' + esc(content.intro) + '</h2><p>' + esc(content.body) + '</p><hr><footer>Gerado em ' + esc(dt) + ' — ' + esc(url) + '</footer></body></html>';
+          w.document.open();
+          w.document.write(html);
+          w.document.close();
+          w.focus();
+          setTimeout(function(){ try { w.print(); } catch(e) {} }, 300);
+        } else {
+          alert('Permita pop-ups para gerar o PDF.');
+        }
       }
     }
 
@@ -1652,7 +1669,7 @@
       pricing: 'Analisar precificação do inventário publicitário para Copa 2026',
       cenografia: 'Otimizar reuso de insumos entre as produções de Cenografia Q2 2026',
       grade: 'Avaliar a grade de programação do SBT e recuperar audiência no prime time',
-      jequiti: 'Analisar sazonalidade e timing ideal de campanha Jequiti &mdash; Dia das Mães 2026'
+      jequiti: 'Dashboard atual'
     };
 
     /* go(mode) — ponto de entrada dos cards da tela inicial. Traduz mode em texto e chama chat() */
