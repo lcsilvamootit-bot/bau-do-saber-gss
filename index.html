@@ -1675,10 +1675,35 @@
       var mbd = createModal('Simular Receita Copa 2026', '<span class="badge bgrn">R$ 68M potencial</span>');
       mbd.parentElement.dataset.sourceBtnId = btn.id;
 
-      mbd.innerHTML = '<div class="sim-c"><h4><i data-lucide="sliders" size="14"></i> Ajuste Analítico de Inventário</h4><label style="font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;margin-bottom:6px">Breaks com CPM revisado (+20%) <span id="' + uid + '_sv">60</span>%</label><input type="range" min="0" max="100" value="60" style="width:100%;accent-color:var(--bl);margin-bottom:12px" oninput="updS(this.value,\'' + uid + '\')"><div class="sr"><div class="sl3">Receita Incremental Projetada</div><div class="sv" id="' + uid + '_sv2">+R$ 40,8M</div><div style="font-size:11px;color:var(--t2);margin-top:3px">Acima da proje&ccedil;&atilde;o base de R$ 310M</div></div></div>';
+      mbd.innerHTML = '<div class="sim-c"><h4><i data-lucide="sliders" size="14"></i> Ajuste Analítico de Inventário</h4><label style="font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;margin-bottom:6px">Breaks com CPM revisado (+20%) <span id="' + uid + '_sv">60</span>%</label><input type="range" min="0" max="100" value="60" style="width:100%;accent-color:var(--bl);margin-bottom:12px" oninput="updS(this.value,\'' + uid + '\')"><div class="sr"><div class="sl3">Receita Incremental Projetada</div><div class="sv" id="' + uid + '_sv2" style="transition:color 0.3s ease">+R$ 40.8M</div><div style="font-size:11px;color:var(--t2);margin-top:3px">Acima da proje&ccedil;&atilde;o base de R$ 310M</div></div><div id="' + uid + '_summary" style="margin-top:14px;font-size:11.5px;color:var(--t2);padding:10px;background:#F8F9FA;border-radius:8px;border:1px solid var(--bd);line-height:1.4"><strong style="color:var(--pu)">Crescimento Orgânico:</strong> Receita adicional segura, mas espaço reprimido para upsell.</div></div>';
       lucide.createIcons();
     }
-    function updS(v, uid) { document.getElementById(uid + '_sv').textContent = v; document.getElementById(uid + '_sv2').textContent = '+R$ ' + (68 * v / 100).toFixed(1) + 'M' }
+    function updS(v, uid) {
+      var result = (68 * v / 100).toFixed(1);
+      var sv = document.getElementById(uid + '_sv');
+      var sv2 = document.getElementById(uid + '_sv2');
+      var sum = document.getElementById(uid + '_summary');
+
+      sv.textContent = v;
+      sv2.textContent = '+R$ ' + result + 'M';
+
+      if (v < 40) {
+        sv2.style.color = '#D62828';
+        sum.innerHTML = '<strong style="color:#D62828">Risco de Déficit:</strong> Margem insuficiente para cobrir meta de investimento do projeto.';
+      } else if (v <= 65) {
+        sv2.style.color = 'var(--pu)';
+        sum.innerHTML = '<strong style="color:var(--pu)">Crescimento Orgânico:</strong> Receita adicional segura, mas espaço reprimido para upsell.';
+      } else if (v <= 80) {
+        sv2.style.color = '#008060';
+        sum.innerHTML = '<strong style="color:#008060">Decisão Otimizada!</strong> Maximiza o ROI e o faturamento sem atrito no mercado atual.';
+      } else if (v <= 90) {
+        sv2.style.color = '#D97706';
+        sum.innerHTML = '<strong style="color:#D97706">Alerta de Fuga:</strong> Ágio agressivo. Pode afastar anunciantes tradicionais e reduzir a ocupação.';
+      } else {
+        sv2.style.color = '#D62828';
+        sum.innerHTML = '<strong style="color:#D62828">Risco Crítico:</strong> Valor inviável mercadologicamente. Ameaça a venda de cotas de patrocínio.';
+      }
+    }
 
     /* =================== TEAMS MEMBERS ===================
      * MEMBERS[key] — Lista de participantes sugeridos por reunião.
@@ -1812,10 +1837,38 @@
      * Mini-flow de 3 steps com 700ms cada antes de revelar o breakdown.
      */
     var COPA_PHASES = [
-      { fase: 'Fase de Grupos', breaks: 72, cpmAtual: 'R$ 48k', cpmSug: 'R$ 57k', delta: '+18%', risco: 'alto' },
-      { fase: 'Oitavas de Final', breaks: 32, cpmAtual: 'R$ 62k', cpmSug: 'R$ 77k', delta: '+24%', risco: 'alto' },
-      { fase: 'Quartas de Final', breaks: 16, cpmAtual: 'R$ 78k', cpmSug: 'R$ 95k', delta: '+22%', risco: 'medio' },
-      { fase: 'Semi + Final', breaks: 23, cpmAtual: 'R$ 95k', cpmSug: 'R$ 118k', delta: '+24%', risco: 'baixo' }
+      {
+        fase: 'Fase de Grupos',
+        breaks: { v: 72, src: 'ERP', ht: 'Invent&aacute;rio liberado' },
+        cpmAtual: { v: 'R$ 48k', src: 'Financeiro', ht: 'Tabela Base' },
+        cpmSug: { v: 'R$ 57k', src: 'Modelo GSS', ht: '+18% &aacute;gio Copa' },
+        delta: { v: '+18%', src: 'C&aacute;lculo', ht: 'Reflete demanda' },
+        risco: 'alto'
+      },
+      {
+        fase: 'Oitavas de Final',
+        breaks: { v: 32, src: 'ERP', ht: 'Contrato A' },
+        cpmAtual: { v: 'R$ 62k', src: 'Financeiro', ht: 'Tabela Base' },
+        cpmSug: { v: 'R$ 77k', src: 'Modelo GSS', ht: '+24% m&aacute;x' },
+        delta: { v: '+24%', src: 'C&aacute;lculo', ht: 'Premium slot' },
+        risco: 'alto'
+      },
+      {
+        fase: 'Quartas de Final',
+        breaks: { v: 16, src: 'ERP', ht: 'Reserva OBR' },
+        cpmAtual: { v: 'R$ 78k', src: 'Financeiro', ht: 'Media Hist.' },
+        cpmSug: { v: 'R$ 95k', src: 'Modelo GSS', ht: 'Ajuste final' },
+        delta: { v: '+22%', src: 'C&aacute;lculo', ht: 'M&eacute;dia ponderada' },
+        risco: 'medio'
+      },
+      {
+        fase: 'Semi + Final',
+        breaks: { v: 23, src: 'ERP', ht: 'Jogos do BR' },
+        cpmAtual: { v: 'R$ 95k', src: 'Financeiro', ht: 'Peak Hist.' },
+        cpmSug: { v: 'R$ 118k', src: 'Modelo GSS', ht: 'Limiar mercado' },
+        delta: { v: '+24%', src: 'C&aacute;lculo', ht: 'Leil&atilde;o Cotas' },
+        risco: 'baixo'
+      }
     ];
 
     var COPA_SECTORS = [
@@ -1850,15 +1903,15 @@
       }
       await dl(400);
 
-      /* ---- Breakdown por Fase ---- */
+      /* ---- Breakdown por Fase (Expandida com Fontes) ---- */
       var phaseHtml = COPA_PHASES.map(function (p) {
-        return '<div class="phase-row">'
-          + '<div class="phase-name">' + p.fase + '</div>'
-          + '<div class="phase-breaks">' + p.breaks + ' breaks</div>'
-          + '<div class="phase-cpm-old">' + p.cpmAtual + '</div>'
-          + '<div class="phase-cpm-new">' + p.cpmSug + '</div>'
-          + '<div class="phase-delta">' + p.delta + '</div>'
-          + '<span class="risk-chip ' + p.risco + '">' + p.risco + '</span>'
+        return '<div class="phase-row" style="align-items:flex-start;padding-top:10px;padding-bottom:10px">'
+          + '<div class="phase-name" style="margin-top:2px">' + p.fase + '</div>'
+          + '<div class="phase-breaks"><div>' + p.breaks.v + ' breaks</div><div style="font-size:9.5px;color:var(--t2);line-height:1.2;margin-top:2px;display:flex;flex-direction:column"><span style="font-weight:600;color:var(--pu)"><i data-lucide="database" size="10"></i> ' + p.breaks.src + '</span><span style="opacity:0.85">' + p.breaks.ht + '</span></div></div>'
+          + '<div class="phase-cpm-old"><div>' + p.cpmAtual.v + '</div><div style="font-size:9.5px;color:var(--t2);line-height:1.2;margin-top:2px;display:flex;flex-direction:column"><span style="font-weight:600;color:var(--pu)"><i data-lucide="database" size="10"></i> ' + p.cpmAtual.src + '</span><span style="opacity:0.85">' + p.cpmAtual.ht + '</span></div></div>'
+          + '<div class="phase-cpm-new"><div>' + p.cpmSug.v + '</div><div style="font-size:9.5px;color:var(--t2);line-height:1.2;margin-top:2px;display:flex;flex-direction:column"><span style="font-weight:600;color:var(--pu)"><i data-lucide="cpu" size="10"></i> ' + p.cpmSug.src + '</span><span style="opacity:0.85">' + p.cpmSug.ht + '</span></div></div>'
+          + '<div class="phase-delta"><div>' + p.delta.v + '</div><div style="font-size:9.5px;color:var(--t2);line-height:1.2;margin-top:2px;display:flex;flex-direction:column"><span style="font-weight:600;color:var(--pu)"><i data-lucide="calculator" size="10"></i> ' + p.delta.src + '</span><span style="opacity:0.85">' + p.delta.ht + '</span></div></div>'
+          + '<span class="risk-chip ' + p.risco + '" style="margin-top:2px">' + p.risco + '</span>'
           + '</div>';
       }).join('');
 
