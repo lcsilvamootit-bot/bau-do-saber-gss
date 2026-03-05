@@ -2172,7 +2172,7 @@
 <div class="sdv">Recomenda&ccedil;&atilde;o</div>
 <p class="bt2">&#10003; <strong>Iniciar campanha imediatamente</strong> &mdash; cada semana de atraso custa ~R$ 7M em convers&atilde;o perdida <span class="src-pill external">Modelo NielsenIQ</span>.<br>&#10003; <strong>Ativar base CRM</strong> de 1,2M via push + e-mail com oferta antecipada &mdash; custo de R$ 180k, ROI projetado de 80x <span class="src-pill internal">CRM Jequiti</span>.<br>&#10003; <strong>Priorizar TV Shop das 22h30</strong> nos 5 dias antes do Dia das M&atilde;es &mdash; slot hist&oacute;rico de maior convers&atilde;o <span class="src-pill internal">ERP Hist. + Ibope</span>.</p>
 <div class="acts">
-<button class="btn bp" onclick="openScheduler(this,'jeq')"><i data-lucide="calendar" size="14"></i> Agendar com Marketing</button>
+<button class="btn bp" id="btn-sch-jeq" onclick="openScheduler(this,'jeq')"><i data-lucide="calendar" size="14"></i> Agendar com Marketing</button>
 <button class="btn bo"><i data-lucide="file-text" size="14"></i> Exportar Proposta</button>
 <button class="btn bgr silvio-shine" onclick="openSilvio('jequiti')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 </div>
@@ -2267,7 +2267,7 @@
       btn.dataset.open = '1';
       var uid = 'sim_' + Date.now();
       var mbd = createModal('Simular Receita Copa 2026', '<span class="badge bgrn">Teto Potencial: R$ 68M</span>');
-      mbd.parentElement.dataset.sourceBtnId = btn.id;
+      document.getElementById('bds-modal').dataset.sourceBtnId = btn.id;
 
       mbd.innerHTML = '<div class="sim-c"><h4><i data-lucide="sliders" size="14"></i> Ajuste Analítico de Inventário</h4><label style="font-size:12.5px;font-weight:700;display:flex;justify-content:space-between;margin-bottom:6px">Breaks com CPM revisado (+20%) <span id="' + uid + '_sv">60</span>%</label><input type="range" min="0" max="100" value="60" style="width:100%;accent-color:var(--bl);margin-bottom:12px" oninput="updS(this.value,\'' + uid + '\')"><div class="sr"><div class="sl3">Receita Incremental Projetada</div><div class="sv" id="' + uid + '_sv2" style="transition:color 0.3s ease">+R$ 40.8M</div><div style="font-size:11px;color:var(--t2);margin-top:3px">Acima da proje&ccedil;&atilde;o base de R$ 310M</div></div><div id="' + uid + '_summary" style="margin-top:14px;font-size:11.5px;color:var(--t2);padding:10px;background:#F8F9FA;border-radius:8px;border:1px solid var(--bd);line-height:1.4"><strong style="color:var(--pu)">Crescimento Orgânico:</strong> Receita adicional segura, mas espaço reprimido para upsell.</div></div>';
       lucide.createIcons();
@@ -2339,7 +2339,7 @@
       if (btn.dataset.open) return;
       btn.dataset.open = '1';
       var mbd = createModal('Agendar no Teams', '<span class="badge" style="background:#5B5FC7;color:#fff">Microsoft Teams</span>');
-      mbd.parentElement.dataset.sourceBtnId = btn.id;
+      document.getElementById('bds-modal').dataset.sourceBtnId = btn.id;
 
       var members = MEMBERS[key] || MEMBERS.copa;
       var checked = members.map(function (m, i) { return '<label style="display:flex;align-items:center;gap:10px;padding:8px;border:1px solid var(--bd);border-radius:10px;cursor:pointer;background:#fff;transition:background .15s" onmouseenter="this.style.background=\'var(--hv)\'" onmouseleave="this.style.background=\'#fff\'"><input type="checkbox" checked data-idx="' + i + '" style="width:16px;height:16px;accent-color:var(--pu);cursor:pointer"><div style="width:34px;height:34px;border-radius:50%;background:' + m.c + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">' + m.i + '</div><div><div style="font-size:13px;font-weight:700">' + m.n + '</div><div style="font-size:11.5px;color:var(--t2)">' + m.r + '</div></div></label>'; }).join('');
@@ -2491,7 +2491,7 @@
       btn.innerHTML = '<div class="si sp" style="border-width:2px;width:16px;height:16px;flex-shrink:0"></div> Detalhando...';
 
       var mbd = createModal('Detalhamento &mdash; Copa 2026', '<span class="badge bred">A&ccedil;&atilde;o Urgente</span>');
-      mbd.parentElement.dataset.sourceBtnId = btn.id;
+      document.getElementById('bds-modal').dataset.sourceBtnId = btn.id;
 
       /* ---- Mini-flow de aprofundamento ---- */
       var miniSteps = FLOWS.pricing;
