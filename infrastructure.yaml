@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Infraestrutura Baú do Saber GSS: S3 (Privado) + CloudFront (OAC)'
+
+Parameters:
+  ProjectName:
+    Type: String
+    Default: bau-do-saber-gss
+
+Resources:
+  # Bucket S3 Privado para Hospedagem
+  WebsiteBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Sub '${ProjectName}-frontend'
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  # Origin Access Control (OAC) para CloudFront
+  CloudFrontOAC:
+    Type: 'AWS::CloudFront::OriginAccessControl'
+    Properties: 
+      OriginAccessControlConfig: 
+        Description: !Sub 'OAC para ${ProjectName}'
+        Name: !Sub '${ProjectName}-oac'
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  # Distribuição CloudFront
+  CloudFrontDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        DefaultRootObject: index.html
+        Origins:
+          - Id: S3Origin
+            DomainName: !GetAtt WebsiteBucket.RegionalDomainName
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+            OriginAccessControlId: !GetAtt CloudFrontOAC.Id
+        DefaultCacheBehavior:
+          TargetOriginId: S3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          ForwardedValues:
+            QueryString: false
+            Cookies:
+              Forward: none
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+
+  # Política do Bucket para permitir apenas CloudFront
+  BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Action: 's3:GetObject'
+            Effect: Allow
+            Resource: !Sub 'arn:aws:s3:::${WebsiteBucket}/*'
+            Principal:
+              Service: 'cloudfront.amazonaws.com'
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub 'arn:aws:arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}'
+
+Outputs:
+  CloudFrontURL:
+    Value: !GetAtt CloudFrontDistribution.DomainName
+    Description: URL de Produção (CloudFront)
+  BucketName:
+    Value: !Ref WebsiteBucket
+    Description: Nome do Bucket para o Script de Deploy
+  DistributionId:
+    Value: !Ref CloudFrontDistribution
+    Description: ID da Distribuição para Invalidação

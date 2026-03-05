@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "aws-kb-retrieval": {
+      "command": "uvx",
+      "args": ["mcp-server-aws-kb-retrieval"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
