@@ -1678,13 +1678,13 @@
       <nav class="sm">
         <div class="mt">Pain&eacute;is Ativos</div>
         <div class="mi on"><i data-lucide="zap" size="16"></i>Copa 2026 &mdash; Invent&aacute;rio</div>
-        <div class="mi"><i data-lucide="layers" size="16"></i>Cenografia &mdash; Insumos Q2</div>
+        <div class="mi"><i data-lucide="layers" size="16"></i>Cenografia &mdash; Crise Global</div>
         <div class="mi"><i data-lucide="tv" size="16"></i>Grade SBT &mdash; Ibope/Kantar</div>
         <div class="mi"><i data-lucide="shopping-bag" size="16"></i>Jequiti &mdash; Sazonalidade</div>
         <div class="mt">Alertas Ativos</div>
         <div class="mi"><span class="dot dr"></span>Sub-precifica&ccedil;&atilde;o Copa (CPM)</div>
         <div class="mi"><span class="dot dy"></span>Grade Prime Time &ndash; Rating Queda</div>
-        <div class="mi"><span class="dot dg"></span>Jequiti: Campanha em dia</div>
+        <div class="mi"><span class="dot dr"></span>Jequiti: Iniciar Campanha Agora</div>
         <div class="mt">Hist&oacute;rico</div>
         <div class="mi"><i data-lucide="message-square" size="15"></i>Revis&atilde;o CPM Break Copa</div>
         <div class="mi"><i data-lucide="message-square" size="15"></i>Cenografia Reuso Jan/2026</div>
@@ -1707,8 +1707,7 @@
           <div class="ts">Apoio &agrave; Decis&atilde;o Executiva &middot; Grupo GSS</div>
         </div>
       </div>
-      <a class="tbtn" href="gss-teams-prototype.html" target="_blank"><i data-lucide="bot" size="15"></i>Abrir no
-        Teams</a>
+      <button class="tbtn" onclick="resetView()"><i data-lucide="home" size="15"></i>In&iacute;cio</button>
     </div>
     <div class="ca" id="ca">
       <div class="em" id="es">
@@ -1730,9 +1729,9 @@
             </div>
           </div>
           <div class="sc" onclick="go('cenografia')">
-            <div class="sl2">&#127748; Cenografia &mdash; Opera&ccedil;&otilde;es Q2</div>
-            <div class="st">Otimizar reuso de insumos entre as produ&ccedil;&otilde;es do trimestre</div>
-            <div class="sm2">&#128308; 45% de redund&acirc;ncia detectada &mdash; R$ 240k salv&aacute;veis</div>
+            <div class="sl2">&#127748; Cenografia &mdash; Crise Global</div>
+            <div class="st">Impacto da escalada EUA x Ir&atilde; nos custos de insumos e logística</div>
+            <div class="sm2">&#128308; Choque de or&ccedil;amento detectado &mdash; +9,0% de aumento</div>
             <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:2px">
               <span class="src-tag internal">ERP Compras</span>
               <span class="src-tag internal">IM Interno</span>
@@ -1751,8 +1750,9 @@
             </div>
           </div>
           <div class="sc" onclick="go('jequiti')">
-            <div class="sl2">&#128202; DASHBOARD</div>
-            <div class="st">Conhe&ccedil;a nosso indicadores atuais</div>
+            <div class="sl2">&#128202; Jequiti &mdash; Sazonalidade</div>
+            <div class="st">Otimizar janela de venda e campanhas para o Dia das M&atilde;es 2026</div>
+            <div class="sm2">&#128308; In&iacute;cio imediato sugerido &mdash; R$ 28M incremental</div>
             <div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:2px">
               <span class="src-tag internal">IM Interno</span>
               <span class="src-tag external">Ibope</span>
@@ -1950,13 +1950,21 @@
      */
     var LABELS = {
       pricing: 'Analisar precificação do inventário publicitário para Copa 2026',
-      cenografia: 'Otimizar reuso de insumos entre as produções de Cenografia Q2 2026',
+      cenografia: 'Analisar impacto da crise EUA x Irã nos custos de Cenografia',
       grade: 'Avaliar a grade de programação do SBT e recuperar audiência no prime time',
-      jequiti: 'Dashboard atual'
+      jequiti: 'Otimizar estratégia comercial Jequiti para o Dia das Mães'
     };
 
     /* go(mode) — ponto de entrada dos cards da tela inicial. Traduz mode em texto e chama chat() */
     function go(m) { chat(LABELS[m] || 'Análise executiva', m) }
+
+    /* resetView() — Volta para a tela inicial (Empty State) */
+    function resetView() {
+      document.getElementById('es').style.display = 'flex';
+      document.getElementById('mw').style.display = 'none';
+      document.getElementById('ml').innerHTML = '';
+      currentMode = 'custom';
+    }
 
     /*
      * chat(txt, mode) — Função central de interação.
@@ -2160,7 +2168,7 @@
       el.innerHTML = `<div class="ech">
         <h3><i data-lucide="shopping-bag" size="15"></i>Parecer &mdash; Jequiti Sazonalidade</h3>
         <div style="display:flex;gap:6px;align-items:center">
-          <span class="badge bylw">Aten&ccedil;&atilde;o</span>
+          <span class="badge bred">A&ccedil;&atilde;o Urgente</span>
         </div>
       </div><div class="ecb">
 <p class="bt2"><strong>Diagn&oacute;stico:</strong> ERP de Vendas <span class="src-pill internal">ERP Vendas</span> mostra que Dia das M&atilde;es 2025 gerou R$ 340M para Jequiti, com 67% via TV Shop. NielsenIQ <span class="src-pill external">NielsenIQ</span> confirma que Natura e O Botic&aacute;rio j&aacute; iniciaram campanhas TV h&aacute; 14 dias. CRM <span class="src-pill internal">CRM Jequiti</span> indica base ativa de 1,2M clientes sem contato em 45 dias. Hist&oacute;rico Ibope <span class="src-pill external">Ibope</span> mostra que iniciar campanha 3 semanas antes = +23% de convers&atilde;o vs. 2 semanas.</p>
