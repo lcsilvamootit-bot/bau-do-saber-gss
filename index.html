@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Ba&uacute; do Saber</title>
+  <link rel="icon" type="image/png" href="gss.png">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
@@ -17,6 +18,38 @@
       --hv: #F0F0F0;
       --t1: #0D0D0D;
       --t2: #5E5E5E
+    }
+
+    /* Destaque Refinado Modo Silvio - Estilo GSS sobre Azul */
+    .btn.silvio-shine {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn.silvio-shine::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transform: rotate(45deg);
+      animation: silvio-shine-anim 4s infinite;
+    }
+
+    @keyframes silvio-shine-anim {
+      0% {
+        left: -100%;
+      }
+
+      15% {
+        left: 100%;
+      }
+
+      100% {
+        left: 100%;
+      }
     }
 
     * {
@@ -306,9 +339,38 @@
       line-height: 1.6;
       margin-bottom: 36px
     }
-    .ttwrap{position:relative;display:inline-block}
-    .ttbox{position:absolute;left:50%;top:100%;transform:translate(-50%,6px);background:#fff;color:var(--t1);border:1px solid var(--bd);padding:10px 12px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);font-size:12.5px;line-height:1.5;min-width:260px;max-width:420px;opacity:0;visibility:hidden;transition:opacity .15s ease, transform .15s ease;z-index:50}
-    .ttwrap:hover .ttbox{opacity:1;visibility:visible;transform:translate(-50%,10px)}
+
+    .ttwrap {
+      position: relative;
+      display: inline-block
+    }
+
+    .ttbox {
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%, 6px);
+      background: #fff;
+      color: var(--t1);
+      border: 1px solid var(--bd);
+      padding: 10px 12px;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+      font-size: 12.5px;
+      line-height: 1.5;
+      min-width: 260px;
+      max-width: 420px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .15s ease, transform .15s ease;
+      z-index: 50
+    }
+
+    .ttwrap:hover .ttbox {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 10px)
+    }
 
     .cg {
       display: grid;
@@ -672,6 +734,16 @@
     .bp:hover {
       background: #001a3d;
       box-shadow: 0 4px 12px rgba(0, 40, 85, .3)
+    }
+
+    .bgr {
+      background: var(--gr);
+      color: #fff
+    }
+
+    .bgr:hover {
+      background: #006b3f;
+      box-shadow: 0 4px 12px rgba(0, 135, 81, .3)
     }
 
     .bpu {
@@ -1378,6 +1450,216 @@
         grid-template-columns: 1fr
       }
     }
+
+    /* --- DASHBOARD & TABS (Daniel's Style) --- */
+    header {
+      background-color: var(--bl);
+      color: white;
+      height: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-title {
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title i {
+      color: var(--ye);
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--bd);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--bd);
+    }
+
+    .card-header h3 {
+      font-size: 15px;
+      color: var(--bl);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+    }
+
+    .kpi-box {
+      text-align: center;
+      padding: 15px;
+      background: #F8F9FA;
+      border-radius: 10px;
+      border: 1px solid var(--bd);
+    }
+
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--bl);
+      margin: 8px 0;
+    }
+
+    .kpi-val-green {
+      color: var(--gr);
+    }
+
+    .kpi-val-red {
+      color: var(--rd);
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      color: var(--t2);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--bd);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .todo-item:hover {
+      background: var(--hv);
+    }
+
+    .todo-icon {
+      background: rgba(242, 169, 0, 0.1);
+      color: var(--ye);
+      padding: 10px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .todo-content h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: var(--bl);
+    }
+
+    .todo-content p {
+      font-size: 12.5px;
+      color: var(--t2);
+      line-height: 1.4;
+    }
+
+    nav.bottom-tabs {
+      background-color: white;
+      height: 60px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      border-top: 1px solid var(--bd);
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--t2);
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 600;
+      width: 33.3%;
+      padding: 8px 0;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-item.active {
+      color: var(--bl);
+    }
+
+    .tab-item.active i,
+    .tab-item.active svg {
+      color: var(--pu);
+    }
+
+    /* Ajuste de Layout - Main area com Abas e Header */
+    .ma {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+
+    @media (min-width: 768px) {
+      header {
+        left: 260px;
+        width: calc(100% - 260px);
+      }
+
+      nav.bottom-tabs {
+        left: 260px;
+        width: calc(100% - 260px);
+      }
+
+      .sb.off+.ma header,
+      .sb.off+.ma nav.bottom-tabs {
+        left: 0;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -1432,7 +1714,9 @@
       <div class="em" id="es">
         <div class="ml"><img src="gss.png" alt="Ba&uacute; do Saber"></div>
         <h1>Ba&uacute; do Saber</h1>
-        <p><span class="ttwrap">Sistema de apoio &agrave; decis&atilde;o para Executivos e Gestores do Grupo GSS.<span class="ttbox">Conecto dados internos (ERP, Ibope, IM) com sin&aacute;is de mercado para recomenda&ccedil;&otilde;es r&aacute;pidas e embasadas.</span></span></p>
+        <p><span class="ttwrap">Sistema de apoio &agrave; decis&atilde;o para Executivos e Gestores do Grupo GSS.<span
+              class="ttbox">Conecto dados internos (ERP, Ibope, IM) com sin&aacute;is de mercado para
+              recomenda&ccedil;&otilde;es r&aacute;pidas e embasadas.</span></span></p>
         <div class="cg">
           <div class="sc" onclick="go('pricing')">
             <div class="sl2">&#9917; Copa 2026 &mdash; Case Ativo</div>
@@ -1481,11 +1765,7 @@
         <div class="chat-header">
           <div class="share-container">
             <button class="btn bo" onclick="toggleShareMenu(event)" style="gap:8px">
-              <i data-lucide="share-2" size="14"></i>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="color:#25D366">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.706 1.438h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg> Compartilhar
+              <i data-lucide="share-2" size="14"></i> Compartilhar
             </button>
             <div class="share-menu" id="shareMenu">
               <button class="share-item" onclick="shareTo('whatsapp')">
@@ -1505,22 +1785,22 @@
         </div>
         <div class="mwrap" id="ml"></div>
       </div>
-    </div>
-    <div class="ia">
-      <div class="cb" id="cb">
-        <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Enviar por voz"><i data-lucide="mic"
-            size="16"></i></button>
-        <span class="mic-timer" id="micTimer"></span>
-        <span class="mic-transcribing" id="micTranscribing">
-          <div class="wave-dots"><span></span><span></span><span></span></div>Transcrevendo...
-        </span>
-        <input class="ci" id="ci" type="text" placeholder="Faça uma pergunta ao Baú do Saber..."
-          onkeypress="if(event.key==='Enter')hs()">
-        <button class="se" onclick="hs()"><i data-lucide="send" size="15"></i></button>
+      <div class="ia">
+        <div class="cb" id="cb">
+          <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Enviar por voz"><i data-lucide="mic"
+              size="16"></i></button>
+          <span class="mic-timer" id="micTimer"></span>
+          <span class="mic-transcribing" id="micTranscribing">
+            <div class="wave-dots"><span></span><span></span><span></span></div>Transcrevendo...
+          </span>
+          <input class="ci" id="ci" type="text" placeholder="Faça uma pergunta ao Baú do Saber..."
+            onkeypress="if(event.key==='Enter')hs()">
+          <button class="se" onclick="hs()"><i data-lucide="send" size="15"></i></button>
+        </div>
+        <div class="hn">Ba&uacute; do Saber conecta: ERP &middot; Ibope/Kantar &middot; IM Interno &middot; CENP
+          &middot;
+          NielsenIQ. Decis&atilde;o final &eacute; sempre do Gestor.</div>
       </div>
-      <div class="hn">Ba&uacute; do Saber conecta: ERP &middot; Ibope/Kantar &middot; IM Interno &middot; CENP &middot;
-        NielsenIQ. Decis&atilde;o final &eacute; sempre do Gestor.</div>
-    </div>
   </main>
   <script>
     /*
@@ -1541,6 +1821,9 @@
      *   Lucide Icons via CDN (https://unpkg.com/lucide@latest)
      *   Chamar lucide.createIcons() após qualquer injeção de [i data-lucide=...] no DOM.
      */
+
+    /* Global State */
+    var currentMode = 'custom';
 
     /* Renderiza todos os ícones Lucide presentes no DOM no momento do carregamento */
     lucide.createIcons();
@@ -1610,7 +1893,7 @@
           w.document.write(html);
           w.document.close();
           w.focus();
-          setTimeout(function(){ try { w.print(); } catch(e) {} }, 300);
+          setTimeout(function () { try { w.print(); } catch (e) { } }, 300);
         } else {
           alert('Permita pop-ups para gerar o PDF.');
         }
@@ -1685,6 +1968,7 @@
      *   6. Chama flow(.aib, mode) — ASYNC — que anima os steps e depois injeta o card
      */
     function chat(txt, mode) {
+      currentMode = mode || 'custom';
       document.getElementById('es').style.display = 'none';
       var w = document.getElementById('mw'); w.style.display = 'flex';
       var ml = document.getElementById('ml'); ml.innerHTML = '';
@@ -1692,7 +1976,7 @@
       var ai = document.createElement('div'); ai.className = 'mai';
       ai.innerHTML = '<div class="ah"><div class="av"><img src="gss.png"></div><div class="an">Ba&uacute; do Saber &mdash; Agentes Ativos</div></div><div class="aib"></div>';
       ml.appendChild(ai); sb2();
-      flow(ai.querySelector('.aib'), mode); /* .aib é o alvo onde flow() injeta steps e card */
+      flow(ai.querySelector('.aib'), currentMode); /* .aib é o alvo onde flow() injeta steps e card */
     }
 
     /* sb2(container) — scrollBottom: força scroll suave para o final do container (ou modal ativo) */
@@ -1701,10 +1985,11 @@
         var m = document.querySelector('.modal-bd');
         container = m ? m : document.getElementById('mw');
       }
-      if (container && container.lastElementChild) {
-        container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
-      } else if (container) {
+      if (container) {
         container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+        var target = container.lastElementChild;
+        if (target && target.lastElementChild) target = target.lastElementChild;
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'end' });
       }
     }
     /* =================== AGENT FLOWS BY CASE ===================
@@ -1784,8 +2069,14 @@
 
     /* =================== CASE 1: COPA =================== */
     function pcrd(b) {
-      var el = document.createElement('div'); el.className = 'ec';
-      el.innerHTML = `<div class="ech"><h3><i data-lucide="trending-up" size="15"></i>Parecer &mdash; Invent&aacute;rio Copa 2026</h3><span class="badge bred">A&ccedil;&atilde;o Urgente</span></div><div class="ecb">
+      var el = document.createElement('div');
+      el.className = 'ec';
+      el.innerHTML = `<div class="ech">
+        <h3><i data-lucide="trending-up" size="15"></i>Parecer &mdash; Invent&aacute;rio Copa 2026</h3>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="badge bred">A&ccedil;&atilde;o Urgente</span>
+        </div>
+      </div><div class="ecb">
 <p class="bt2"><strong>Diagn&oacute;stico:</strong> Oportunidade captur&aacute;vel de <strong>R$ 68M</strong> via revis&atilde;o de tabela em 143 breaks <span class="src-pill internal">ERP Invent.</span>. A audi&ecirc;ncia projetada de 38 pts <span class="src-pill external">Ibope</span> &eacute; potencializada pelo elenco liderado por <strong>Falcão Bueno</strong>, garantindo reten&ccedil;&atilde;o premium.</p>
 <div class="kg">
 <div class="kb"><div class="kl">Receita Potencial</div><div class="kv g">R$ 378M</div><div class="ks">&#8593; +R$ 68M captur&aacute;vel</div></div>
@@ -1796,18 +2087,25 @@
 <p class="bt2">&#10003; <strong>Revisar CPM Premium</strong> (Breaks 1 e 2, &gt;35 pts) com acr&eacute;scimo de 18&ndash;22% sobre tabela base <span class="src-pill external">CENP Benchmark</span>.<br>&#10003; <strong>Pacote Copa + Digital:</strong> TV Aberta + pr&eacute;-roll +SBT com desconto de 10% &mdash; aumenta ocupa&ccedil;&atilde;o e ROI.<br>&#10003; <strong>Prioridade setorial:</strong> Alimentos &amp; Bebidas t&ecirc;m maior prop&ecirc;nso hist&oacute;rico a pagar premium <span class="src-pill internal">IM Comercial</span>.</p>
 <div class="acts">
 <button class="btn bp" id="btn-sim-copa" onclick="openSim(this)"><i data-lucide="sliders" size="14"></i>Simular Receita</button>
-<button class="btn bo" id="btn-silvio-copa" onclick="openSilvio('pricing')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 <button class="btn bpu" id="btn-sch-copa" onclick="openScheduler(this,'copa')"><i data-lucide="calendar" size="14"></i> Agendar no Teams</button>
 <button class="btn bpu" id="btn-det-copa" onclick="openDetail(this)"><i data-lucide="zoom-in" size="14"></i> Detalhar</button>
+<button class="btn bgr silvio-shine" onclick="openSilvio('pricing')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 </div>
 </div>`;
-      b.appendChild(el); lucide.createIcons();
+      b.appendChild(el);
+      lucide.createIcons();
     }
 
     /* =================== CASE 2: CENOGRAFIA =================== */
     function cncrd(b) {
-      var el = document.createElement('div'); el.className = 'ec';
-      el.innerHTML = `<div class="ech"><h3><i data-lucide="layers" size="15"></i>Parecer &mdash; Cenografia Q2 2026</h3><span class="badge bred">A&ccedil;&atilde;o Urgente</span></div><div class="ecb">
+      var el = document.createElement('div');
+      el.className = 'ec';
+      el.innerHTML = `<div class="ech">
+        <h3><i data-lucide="layers" size="15"></i>Parecer &mdash; Cenografia Q2 2026</h3>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="badge bred">A&ccedil;&atilde;o Urgente</span>
+        </div>
+      </div><div class="ecb">
 <p class="bt2"><strong>Diagn&oacute;stico:</strong> Briefings do ERP de Compras <span class="src-pill internal">ERP Compras</span> revelam 3 produ&ccedil;&otilde;es com pedidos sobrepostos. O agente de estoque <span class="src-pill internal">Sis. Estoque</span> identificou 45% de insumos j&aacute; dispon&iacute;veis no Galp&atilde;o 3. Luiz Torres (Dir. Produ&ccedil;&atilde;o) <span class="src-pill internal">IM Interno</span> confirmou via chat que a madeira do set anterior &eacute; compat&iacute;vel.</p>
 <div class="kg">
 <div class="kb"><div class="kl">Custo Pedido Original</div><div class="kv r">R$ 450k</div><div class="ks">3 produ&ccedil;&otilde;es separadas</div></div>
@@ -1818,18 +2116,25 @@
 <p class="bt2">&#10003; <strong>N&atilde;o aprovar</strong> compra de madeira nova para o Podcast &mdash; sucatas do Galp&atilde;o 3 suprem 80% das medidas <span class="src-pill internal">Sis. Estoque</span>.<br>&#10003; <strong>Painel LED modular</strong> com rod&iacute;zios &mdash; uso alternado Game Show (ter&ccedil;as) e Podcast (quintas) sem conflito <span class="src-pill internal">IM Calendar</span>.<br>&#10003; <strong>Protocolo de pr&eacute;-aprova&ccedil;&atilde;o:</strong> antes de qualquer nova compra, consulta obrigat&oacute;ria ao Ba&uacute; do Saber.</p>
 <div class="acts">
 <button class="btn bp" onclick="this.innerHTML='&#10003; Aprovado';this.disabled=true"><i data-lucide="check-circle" size="14"></i>Aprovar Otimiza&ccedil;&atilde;o</button>
-<button class="btn bo" id="btn-silvio-cen" onclick="openSilvio('cenografia')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 <button class="btn bpu" id="btn-sch-cen" onclick="openScheduler(this,'cen')"><i data-lucide="calendar" size="14"></i> Agendar com Chefia</button>
 <button class="btn bo"><i data-lucide="file-text" size="14"></i> Exportar Parecer</button>
+<button class="btn bgr silvio-shine" onclick="openSilvio('cenografia')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 </div>
 </div>`;
-      b.appendChild(el); lucide.createIcons();
+      b.appendChild(el);
+      lucide.createIcons();
     }
 
     /* =================== CASE 3: GRADE =================== */
     function gradecrd(b) {
-      var el = document.createElement('div'); el.className = 'ec';
-      el.innerHTML = `<div class="ech"><h3><i data-lucide="tv" size="15"></i>Parecer &mdash; Grade de Programa&ccedil;&atilde;o SBT</h3><span class="badge bylw">Oportunidade</span></div><div class="ecb">
+      var el = document.createElement('div');
+      el.className = 'ec';
+      el.innerHTML = `<div class="ech">
+        <h3><i data-lucide="tv" size="15"></i>Parecer &mdash; Grade de Programa&ccedil;&atilde;o SBT</h3>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="badge bylw">Oportunidade</span>
+        </div>
+      </div><div class="ecb">
 <p class="bt2"><strong>Diagn&oacute;stico:</strong> Dados Ibope/Kantar <span class="src-pill external">Ibope/Kantar</span> de Dez/2025&ndash;Jan/2026 mostram que o SBT no prime time (20h&ndash;22h) tem m&eacute;dia de <strong>6,5 pontos</strong> de rating (share 13%). Globo no mesmo slot: 25 pontos. O EPG interno <span class="src-pill internal">EPG SBT</span> aponta que &ldquo;A Tarde &Eacute; Sua&rdquo; reprisado &agrave;s 21h est&aacute; com queda de 2,1 pontos nos &uacute;ltimos 30 dias. Dados do +SBT <span class="src-pill internal">Cat&aacute;logo +SBT</span> mostram que realities t&ecirc;m 3,2x mais engajamento nessa faixa.</p>
 <div class="kg">
 <div class="kb"><div class="kl">Rating Prime Time Atual</div><div class="kv r">6,5 pts</div><div class="ks">M&eacute;dia Dez/Jan (Ibope)</div></div>
@@ -1839,18 +2144,25 @@
 <div class="sdv">Recomenda&ccedil;&atilde;o</div>
 <p class="bt2">&#10003; <strong>Mover reprises de &ldquo;A Tarde &Eacute; Sua&rdquo;</strong> das 21h para as 23h30 &mdash; p&uacute;blico 45+ aceita melhor nesse slot <span class="src-pill external">Kantar Perfil</span>.<br>&#10003; <strong>Inserir formato reality 60 min</strong> &agrave;s 21h (cat&aacute;logo +SBT j&aacute; tem 4 op&ccedil;&otilde;es aprovadas) &mdash; audi&ecirc;ncia projetada: +2,1 pts <span class="src-pill internal">EPG + Ibope</span>.<br>&#10003; <strong>Renegociar cotas</strong> do prime time ap&oacute;s primeira semana de dados reais &mdash; alerta autom&aacute;tico configurado.</p>
 <div class="acts">
-<button class="btn bo" id="btn-silvio-grade" onclick="openSilvio('grade')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
-<button class="btn bp" id="btn-sch-grade" onclick="openScheduler(this,'grade')"><i data-lucide="calendar" size="14"></i> Agendar com Dir. Programa&ccedil;&atilde;o</button>
+<button class="btn bpu" id="btn-sch-grade" onclick="openScheduler(this,'grade')"><i data-lucide="calendar" size="14"></i> Agendar com Dir. Programa&ccedil;&atilde;o</button>
 <button class="btn bo"><i data-lucide="file-text" size="14"></i> Exportar Proposta</button>
+<button class="btn bgr silvio-shine" onclick="openSilvio('grade')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 </div>
 </div>`;
-      b.appendChild(el); lucide.createIcons();
+      b.appendChild(el);
+      lucide.createIcons();
     }
 
     /* =================== CASE 4: JEQUITI =================== */
     function jeqcrd(b) {
-      var el = document.createElement('div'); el.className = 'ec';
-      el.innerHTML = `<div class="ech"><h3><i data-lucide="shopping-bag" size="15"></i>Parecer &mdash; Jequiti Sazonalidade Dia das M&atilde;es</h3><span class="badge bylw">Aten&ccedil;&atilde;o</span></div><div class="ecb">
+      var el = document.createElement('div');
+      el.className = 'ec';
+      el.innerHTML = `<div class="ech">
+        <h3><i data-lucide="shopping-bag" size="15"></i>Parecer &mdash; Jequiti Sazonalidade</h3>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="badge bylw">Aten&ccedil;&atilde;o</span>
+        </div>
+      </div><div class="ecb">
 <p class="bt2"><strong>Diagn&oacute;stico:</strong> ERP de Vendas <span class="src-pill internal">ERP Vendas</span> mostra que Dia das M&atilde;es 2025 gerou R$ 340M para Jequiti, com 67% via TV Shop. NielsenIQ <span class="src-pill external">NielsenIQ</span> confirma que Natura e O Botic&aacute;rio j&aacute; iniciaram campanhas TV h&aacute; 14 dias. CRM <span class="src-pill internal">CRM Jequiti</span> indica base ativa de 1,2M clientes sem contato em 45 dias. Hist&oacute;rico Ibope <span class="src-pill external">Ibope</span> mostra que iniciar campanha 3 semanas antes = +23% de convers&atilde;o vs. 2 semanas.</p>
 <div class="kg">
 <div class="kb"><div class="kl">Vendas DM 2025</div><div class="kv b">R$ 340M</div><div class="ks">67% via TV Shop (ERP)</div></div>
@@ -1860,19 +2172,21 @@
 <div class="sdv">Recomenda&ccedil;&atilde;o</div>
 <p class="bt2">&#10003; <strong>Iniciar campanha imediatamente</strong> &mdash; cada semana de atraso custa ~R$ 7M em convers&atilde;o perdida <span class="src-pill external">Modelo NielsenIQ</span>.<br>&#10003; <strong>Ativar base CRM</strong> de 1,2M via push + e-mail com oferta antecipada &mdash; custo de R$ 180k, ROI projetado de 80x <span class="src-pill internal">CRM Jequiti</span>.<br>&#10003; <strong>Priorizar TV Shop das 22h30</strong> nos 5 dias antes do Dia das M&atilde;es &mdash; slot hist&oacute;rico de maior convers&atilde;o <span class="src-pill internal">ERP Hist. + Ibope</span>.</p>
 <div class="acts">
-<button class="btn bo" id="btn-silvio-jeq" onclick="openSilvio('jequiti')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 <button class="btn bp" onclick="openScheduler(this,'jeq')"><i data-lucide="calendar" size="14"></i> Agendar com Marketing</button>
 <button class="btn bo"><i data-lucide="file-text" size="14"></i> Exportar Proposta</button>
+<button class="btn bgr silvio-shine" onclick="openSilvio('jequiti')"><i data-lucide="mic" size="14"></i> Modo Silvio</button>
 </div>
 <div class="sched-area"></div>
 </div>`;
-      b.appendChild(el); lucide.createIcons();
+      b.appendChild(el);
+      lucide.createIcons();
     }
 
     function xcrd(b) { var el = document.createElement('div'); el.className = 'ec'; el.innerHTML = `<div class="ech"><h3><i data-lucide="cpu" size="15"></i>Ba&uacute; do Saber</h3></div><div class="ecb"><p class="bt2">Selecione um dos 4 casos para ver o parecer executivo detalhado.</p><div class="acts"><button class="btn bp" onclick="go('pricing')">&#9917; Copa 2026</button><button class="btn bo" onclick="go('cenografia')">&#127748; Cenografia</button><button class="btn bo" onclick="go('grade')">&#128250; Grade SBT</button><button class="btn bo" onclick="go('jequiti')">&#128144; Jequiti</button></div></div>`; b.appendChild(el); lucide.createIcons(); }
 
     /* =================== MODO SILVIO — Personalidade Executiva =================== */
     function openSilvio(mode) {
+      var m = mode || currentMode;
       var mbd = createModal('Parecer do Patr&atilde;o', '<span class="badge bpu">Vis&atilde;o Executiva GSS</span>');
       var content = {
         pricing: {
@@ -1897,29 +2211,36 @@
         }
       };
 
-      var d = content[mode] || { slogan: "A pergunta que eu faço é...", text: "Vamos encontrar uma equação para esse negócio. Decida na hora!", verdict: "Prosseguir com análise." };
+      var d = content[m] || { slogan: "A pergunta que eu faço é...", text: "Vamos encontrar uma equação para esse negócio. Decida na hora!", verdict: "Prosseguir com análise." };
 
       mbd.innerHTML = `
-        <div style="background: linear-gradient(135deg, #4A148C 0%, #1A237E 100%); padding: 24px; border-radius: 12px; color: #fff; margin-bottom: 16px;">
-          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
-            <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.4)">
-              <i data-lucide="mic" size="24" style="color: #fff"></i>
+        <div style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 28px; border-radius: 20px; color: #1a1a1a; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 8px 32px rgba(0,0,0,0.08); margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+            <div style="width: 48px; height: 48px; background: rgba(0, 135, 81, 0.1); border-radius: 14px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(0, 135, 81, 0.2)">
+              <i data-lucide="mic" size="24" style="color: var(--gr)"></i>
             </div>
-            <h4 style="font-size: 18px; font-weight: 700; margin: 0; color: #fff">${d.slogan}</h4>
+            <div>
+              <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #666; margin-bottom: 4px; font-weight: 600;">Vis&atilde;o Executiva</div>
+              <h4 style="font-size: 19px; font-weight: 800; margin: 0; color: #111; line-height: 1.2;">${d.slogan}</h4>
+            </div>
           </div>
-          <p style="font-style: italic; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.1); padding: 16px; border-radius: 8px; border-left: 4px solid #FFD600;">
-            "${d.text}"
-          </p>
-          <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 16px;">
-            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); margin-bottom: 6px;">Veredito do Patrão</div>
-            <div style="font-size: 16px; font-weight: 700; color: #FFD600;">${d.verdict}</div>
+          <div style="position: relative; padding: 20px; background: rgba(255,255,255,0.5); border-radius: 12px; margin-bottom: 24px; border-left: 3px solid var(--gr)">
+            <p style="font-style: italic; font-size: 15px; line-height: 1.7; color: #333; margin: 0;">
+              "${d.text}"
+            </p>
+          </div>
+          <div style="border-top: 1px solid rgba(0,0,0,0.06); padding-top: 20px;">
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 8px; font-weight: 600;">Veredito do Patr&atilde;o</div>
+            <div style="font-size: 17px; font-weight: 700; color: var(--gr); display: flex; align-items: center; gap: 8px;">
+              <i data-lucide="check-circle" size="18"></i> ${d.verdict}
+            </div>
           </div>
         </div>
-        <div id="silvio-extra"></div>
-        <button class="btn bp" style="width: 100%; justify-content: center;" onclick="closeModal()">Entendido, Patrão!</button>
+        <div id="silvio-extra" style="margin-bottom: 12px;"></div>
+        <button class="btn bgr" style="width: 100%; justify-content: center; padding: 14px; font-weight: 700; border-radius: 12px;" onclick="closeModal()">Entendido, Patr&atilde;o!</button>
       `;
       lucide.createIcons();
-      if (mode === 'pricing' || mode === 'cenografia' || mode === 'grade') {
+      if (m === 'pricing' || m === 'cenografia' || m === 'grade') {
         var extra = mbd.querySelector('#silvio-extra');
         var abtn = document.createElement('button');
         abtn.className = 'btn bo';
@@ -1928,10 +2249,10 @@
         abtn.id = 'btn-audio-silvio';
         abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio';
         extra.appendChild(abtn);
-        var src = mode === 'pricing' ? 'voz_silvio_2.mp3' : (mode === 'cenografia' ? 'voz_silvio_1.mp3' : 'voz_silvio_3.mp3');
+        var src = m === 'pricing' ? 'voz_Silvio_2.mp3' : (m === 'cenografia' ? 'voz_Silvio_1.mp3' : 'voz_Silvio_3.mp3');
         var audio = new Audio(src);
-        abtn.onclick = function(){ if(audio.paused){ audio.play(); abtn.innerHTML = '<i data-lucide="pause" size="14"></i> Pausar &aacute;udio'; } else { audio.pause(); audio.currentTime = 0; abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio'; } lucide.createIcons(); };
-        audio.onended = function(){ abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio'; lucide.createIcons(); };
+        abtn.onclick = function () { if (audio.paused) { audio.play(); abtn.innerHTML = '<i data-lucide="pause" size="14"></i> Pausar &aacute;udio'; } else { audio.pause(); audio.currentTime = 0; abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio'; } lucide.createIcons(); };
+        audio.onended = function () { abtn.innerHTML = '<i data-lucide="volume-2" size="14"></i> Ouvir &aacute;udio'; lucide.createIcons(); };
         lucide.createIcons();
       }
     }
@@ -2068,7 +2389,9 @@
       var tag = document.createElement('div'); tag.id = uid + '_p_' + i;
       tag.style.cssText = 'display:inline-flex;align-items:center;gap:7px;padding:6px 10px;background:var(--hv);border:1px solid var(--bd);border-radius:20px;font-size:12.5px;font-weight:600';
       tag.innerHTML = '<div style="width:26px;height:26px;border-radius:50%;background:' + c + ';color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700">' + i + '</div>' + n + ' <span style="font-size:10px;color:var(--pu);font-weight:700">[Graph]</span> <span onclick="this.parentElement.remove()" style="cursor:pointer;color:var(--t2);margin-left:4px;font-size:16px;line-height:1">&times;</span>';
-      added.appendChild(tag); sb2();
+      added.appendChild(tag);
+      var mbd = document.querySelector('.modal-bd');
+      if (mbd) sb2(mbd);
     }
 
     async function runSchedule(btn, uid, key) {
@@ -2087,11 +2410,17 @@
       for (var s of tmSteps) {
         var el = document.createElement('div'); el.className = 'stp';
         el.innerHTML = '<div class="si sp"></div><span>' + s + '</span>';
-        sd.appendChild(el); await dl(1400);
+        sd.appendChild(el);
+        var mbd = document.querySelector('.modal-bd');
+        if (mbd) sb2(mbd);
+        await dl(1400);
         el.className = 'stp dn'; el.innerHTML = '<div class="si ok">&#10003;</div><span>' + s + '</span>';
+        if (mbd) sb2(mbd);
       }
       await dl(500);
       renderMeeting(container, key);
+      var mbd = document.querySelector('.modal-bd');
+      if (mbd) sb2(mbd);
       btn.innerHTML = '&#10003; Agendado com Sucesso';
     }
 
